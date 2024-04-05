@@ -86,17 +86,20 @@ public class MenuExample {
         games.printGamelijst();
         System.out.println();
         System.out.println("Kies een game uit: ");
-        int gekozenGameIndex = scanner.nextInt() - 1;
-        scanner.nextLine();
-        Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+        int gekozenGameIndex = scanner.nextInt();
+            scanner.nextLine();
+            Game gekozenGame = games.getGame(gekozenGameIndex -1);
+            if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             review.readFile(gekozenGame);
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
 
             gekozenGame.toonGegevens();
-        }
+            }
+            
+      
+            
         System.out.println();
         System.out.println("Wilt u deze spel beoordelen? (J/N)");
         String keuze = scanner.nextLine();
@@ -123,10 +126,11 @@ public class MenuExample {
             review.writeReviewToFile(gekozenGame); // Write the review to a file
             System.out.println();
             System.out.println("Bedankt voor uw review!");
+            terugNaarHoofdmenu();
 
 
         } else if (keuze.equalsIgnoreCase("N")){ terugNaarHoofdmenu();}
-        terugNaarHoofdmenu();
+        
 
 
     }
@@ -252,5 +256,12 @@ public class MenuExample {
         System.out.println("Druk op Enter om terug te gaan naar het hoofdmenu.");
         scanner.nextLine();
         clearScreen();
+    }
+
+    private static void terugNaarHoofdmenu2() {
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+        clearScreen();
+
     }
 }
