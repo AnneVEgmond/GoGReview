@@ -133,17 +133,15 @@ public class Game {
             return 0.0; // Return 0 if there are no reviews
         }
 
-        for (Review review : reviews) {
+        ArrayList<Review> reviewsCopy = new ArrayList<>(reviews);
+
+        for (Review review : reviewsCopy) {
             review.readFile(game);
             totalRating += (review.getRatingGraphics() + review.getRatingStory() + review.getRatingGameplay()) / 3.0;
         }
         this.gemiddeldeRating = totalRating / numReviews;
-
+    
         return totalRating / numReviews;
-    }
-
-    public double getRating () {
-        return gemiddeldeRating;
     }
 
 

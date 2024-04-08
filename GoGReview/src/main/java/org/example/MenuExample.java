@@ -91,7 +91,7 @@ public class MenuExample {
         int gekozenGameIndex = scanner.nextInt()-1;
         scanner.nextLine();
         Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
+        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             review.readFile(gekozenGame);
@@ -148,7 +148,7 @@ public class MenuExample {
         System.out.println("Kies een game uit: ");
         int gekozenGameIndex = scanner.nextInt() - 1;
         Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+        if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());

@@ -21,17 +21,14 @@ public class GameLibrary {
 
     public void printGamesByRating() {
         // Sort the games by rating
-        for (Game game : gamelijst) {
-            game.calculateAverageRating(game);
+    
+        
 
-        }
-        
-        
         
         // Print the sorted list
         for (Game game : gamelijst) {
-            game.calculateAverageRating(game);
-            System.out.println(game.getNaam() + " - Rating: " + game.getRating());
+            ;
+            System.out.println(game.getNaam() + " - Rating: " + game.calculateAverageRating(game));
         }
     }
      
