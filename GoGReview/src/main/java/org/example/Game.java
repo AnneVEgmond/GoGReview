@@ -142,6 +142,10 @@ public class Game {
         return totalRating / numReviews;
     }
 
+    public double getRating () {
+        return calculateAverageRating();
+    }
+
 
 
     public void toonGegevens() {
