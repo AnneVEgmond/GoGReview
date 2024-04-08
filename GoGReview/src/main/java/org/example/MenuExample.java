@@ -79,6 +79,8 @@ public class MenuExample {
     private static void optie1() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
+        Review review = new Review();
+    
         
         System.out.println("U heeft gekozen voor alle games bekijken.");
         // Voeg hier de functionaliteit toe voor Optie 1
@@ -86,15 +88,15 @@ public class MenuExample {
         games.printGamelijst();
         System.out.println();
         System.out.println("Kies een game uit: ");
-        int gekozenGameIndex = scanner.nextInt();
-            scanner.nextLine();
-            Game gekozenGame = games.getGame(gekozenGameIndex -1);
-            if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
+        int gekozenGameIndex = scanner.nextInt()-1;
+        scanner.nextLine();
+        Game gekozenGame = games.getGame(gekozenGameIndex);
+        if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
-            
+            review.readFile(gekozenGame);
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
-
+            
             gekozenGame.toonGegevens();
             }
             
@@ -106,7 +108,7 @@ public class MenuExample {
 
         if (keuze.equalsIgnoreCase("J")) {
             // hier functionaliteit om review te geven op een game.
-            Review review = new Review();
+            review = new Review();
 
             System.out.println("Geef uw beoordeling voor graphics (1-5): ");
             int graphicsRating = scanner.nextInt();
@@ -196,7 +198,7 @@ public class MenuExample {
         System.out.println("U heeft gekozen voor uitverkoop.");
         System.out.println();
 
-        // Voeg hier de functionaliteit toe voor Optie 3
+       // games.printGamesByGenre();
 
         terugNaarHoofdmenu();
     }

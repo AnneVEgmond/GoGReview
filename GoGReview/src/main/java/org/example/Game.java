@@ -124,7 +124,7 @@ public class Game {
         this.reviews = reviews;
     }
 
-    public double calculateAverageRating() {
+    public double calculateAverageRating(Game game) {
 
         double totalRating = 0.0;
         int numReviews = reviews.size();
@@ -134,16 +134,16 @@ public class Game {
         }
 
         for (Review review : reviews) {
-
-
+            review.readFile(game);
             totalRating += (review.getRatingGraphics() + review.getRatingStory() + review.getRatingGameplay()) / 3.0;
         }
+        this.gemiddeldeRating = totalRating / numReviews;
 
         return totalRating / numReviews;
     }
 
     public double getRating () {
-        return calculateAverageRating();
+        return gemiddeldeRating;
     }
 
 
@@ -156,7 +156,7 @@ public class Game {
         System.out.println();
         System.out.println("Maker: " + maker);
         System.out.println();
-        System.out.printf("Rating: %.1f\n",calculateAverageRating());
+        System.out.printf("Rating: " + gemiddeldeRating);
         System.out.println();
         System.out.println("genre: " + genre);
         System.out.println();
