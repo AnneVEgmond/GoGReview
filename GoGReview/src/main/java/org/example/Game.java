@@ -1,5 +1,4 @@
 package org.example;
-
 import java.util.ArrayList;
 
 public class Game {
@@ -14,7 +13,7 @@ public class Game {
     private int minimaleLeeftijd;
     private String maker;
     private String beschrijving;
-    private ArrayList<Review> reviews;
+    private ArrayList<Review> reviews; 
 
 
 
@@ -31,7 +30,7 @@ public class Game {
         this.reviews = new ArrayList<>(); // Initialize ArrayList
 
 
-    }
+       }
 
     public Game () {
 
@@ -43,17 +42,17 @@ public class Game {
     //SETTERS AND GETTERS
 
     public void setMinimaleLeeftijd(int minimaleLeeftijd) {
-        this.minimaleLeeftijd = minimaleLeeftijd;
+        this.minimaleLeeftijd = minimaleLeeftijd; 
     }
 
 
     public void setPrijs(double prijs) {
-        this.prijs = prijs;
+        this.prijs = prijs; 
     }
 
 
     public void setAantalSpelers(int aantalSpelers) {
-        this.aantalSpelers = aantalSpelers;
+        this.aantalSpelers = aantalSpelers;   
     }
 
 
@@ -124,7 +123,15 @@ public class Game {
         this.reviews = reviews;
     }
 
-    public double calculateAverageRating(Game game) {
+    public void setRating (double rating) {
+        this.gemiddeldeRating = rating;
+    }
+
+    public double getRating() {
+        return gemiddeldeRating;
+    }
+
+    public double calculateAverageRating() {
 
         double totalRating = 0.0;
         int numReviews = reviews.size();
@@ -133,14 +140,13 @@ public class Game {
             return 0.0; // Return 0 if there are no reviews
         }
 
-        ArrayList<Review> reviewsCopy = new ArrayList<>(reviews);
+        for (Review review : reviews) {
 
-        for (Review review : reviewsCopy) {
-            review.readFile(game);
+
             totalRating += (review.getRatingGraphics() + review.getRatingStory() + review.getRatingGameplay()) / 3.0;
         }
-        this.gemiddeldeRating = totalRating / numReviews;
-    
+
+        setRating(totalRating/numReviews);
         return totalRating / numReviews;
     }
 
@@ -154,11 +160,17 @@ public class Game {
         System.out.println();
         System.out.println("Maker: " + maker);
         System.out.println();
-        System.out.printf("Rating: " + gemiddeldeRating);
+        System.out.printf("Rating: %.1f\n",calculateAverageRating());
         System.out.println();
         System.out.println("genre: " + genre);
         System.out.println();
         System.out.println("Beschrijving: ");
         System.out.println(beschrijving);
     }
+
+    public double  toonGegevens2() {
+        return calculateAverageRating();
+
+    }
 }
+

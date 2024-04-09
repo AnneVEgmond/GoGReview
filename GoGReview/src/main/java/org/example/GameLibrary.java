@@ -14,24 +14,26 @@ public class GameLibrary {
         gamelijst.add(gta3);
 
         Game doom = new Game ("Doom", 1993, "Action", 1, 60.0, 18, "Bethesda Softworks", "Doom is a first-person shooter game developed and published by id Software. Released on December 10, 1993, for DOS, it is the first installment in the Doom franchise. The player assumes the role of a space marine, later unofficially referred to as Doomguy, fighting through hordes of undead humans and invading demons. The game begins on the moons of Mars and finishes in hell, with the player traversing each level to find its exit or defeat its final boss. It is an early example of 3D graphics in video games, and has enemies and objects as 2D images, a technique sometimes referred to as 2.5D graphics.");
-        
         gamelijst.add(doom);
 
+        Game starwars = new Game("starwars Battlefornt 2", 2005, "Shooter", 64, 15.99, 12, "Pandemic Studios" ,"Star Wars: Battlefront II is a 2005 first and third-person shooter video game based on the Star Wars film franchise. Developed by Pandemic Studios and published by LucasArts, it is a sequel to 2004's Star Wars: Battlefront and the second installment in the Star Wars: Battlefront series." );
+        gamelijst.add(starwars);
+    
     }
 
     public void printGamesByRating() {
+        Review review = new Review();
+      
         // Sort the games by rating
-    
-        
-
-        
+        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonGegevens2).reversed());
         // Print the sorted list
         for (Game game : gamelijst) {
-            ;
-            System.out.println(game.getNaam() + " - Rating: " + game.calculateAverageRating(game));
+            review.readFile(game);
+
+            System.out.println(game.getNaam() + " - Rating: " + game.toonGegevens2());
         }
     }
-     
+    
 
     public void printGamesByGenre(String genre) {
         // Print games sharing the specified genre
@@ -48,7 +50,6 @@ public class GameLibrary {
 
     public void printGamelijst() {
         for (int i = 0; i < gamelijst.size(); i++) {
-            gamelijst.get(i).calculateAverageRating(gamelijst.get(i));
             System.out.println( ( i+1) + " " + gamelijst.get(i).getNaam());
         }
     }
@@ -95,6 +96,7 @@ public class GameLibrary {
         game.setBeschrijving(beschrijving);
 
         gamelijst.add(game);
+        keyboard.close();
     }
 
     public void verwijderGame (int gameIndex) {

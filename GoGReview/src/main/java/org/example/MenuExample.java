@@ -53,19 +53,19 @@ public class MenuExample {
     }
 
     private void printMenu() {
-        System.out.println("           \\.   \\.      __,-\"-.__      ./   ./\n" +
-                "       \\.   \\`.  \\`.-'\"\" _,=\"=._ \"\"`-.'/  .'/   ./\n" +
-                "        \\`.  \\_`-''      _,=\"=._      ``-'_/  .'/\n" +
-                "         \\ `-',-._   _.  _,=\"=._  ,_   _.-,`-' /\n" +
-                "      \\. /`,-',-._\"\"\"  \\ _,=\"=._ /  \"\"\"_.-,`-,'\\ ./\n" +
+        System.out.println("           \\.   \\.      _,-\"-._      ./   ./\n" +
+                "       \\.   \\.  \\.-'\"\" ,=\"=. \"\"`-.'/  .'/   ./\n" +
+                "        \\.  \\_-''      ,=\"=.      ``-'_/  .'/\n" +
+                "         \\ -',-._   _.  _,=\"=._  ,_   _.-,-' /\n" +
+                "      \\. /,-',-._\"\"\"  \\ _,=\"=._ /  \"\"\"_.-,-,'\\ ./\n" +
                 "       \\`-'  /    `-._  \"       \"  _.-'    \\  `-'/\n" +
                 "       /)   (         \\    ,-.    /         )   (\\\n" +
-                "    ,-'\"     `-.       \\  /   \\  /       .-'     \"`-,\n" +
-                "  ,'_._         `-.____/ /  _  \\ \\____.-'         _._`,\n" +
-                " /,'   `.                \\_/ \\_/                .'   `,\\\n" +
+                "    ,-'\"     -.       \\  /   \\  /       .-'     \"-,\n" +
+                "  ,'.         -.____/ /  _  \\ \\____.-'         _._,\n" +
+                " /,'   `.                \\/ \\/                .'   `,\\\n" +
                 "/'       )                  _                  (       `\\\n" +
-                "        /   _,-'\"`-.  ,++|T|||T|++.  .-'\"`-,_   \\\n" +
-                "       / ,-'        \\/|`|`|`|'|'|'|\\/        `-, \\\n" +
+                "        /   _,-'\"-.  ,++|T|||T|++.  .-'\"-,_   \\\n" +
+                "       / ,-'        \\/|||`|'|'|'|\\/        `-, \\\n" +
                 "      /,'             | | | | | | |             `\\");
         System.out.println("MENU:");
 
@@ -80,8 +80,6 @@ public class MenuExample {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
-    
-        
         System.out.println("U heeft gekozen voor alle games bekijken.");
         // Voeg hier de functionaliteit toe voor Optie 1
         System.out.println();
@@ -89,14 +87,14 @@ public class MenuExample {
         System.out.println();
         System.out.println("Kies een game uit: ");
         int gekozenGameIndex = scanner.nextInt()-1;
-        scanner.nextLine();
-        Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+            scanner.nextLine();
+            Game gekozenGame = games.getGame(gekozenGameIndex);
+            if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             review.readFile(gekozenGame);
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
-            
+
             gekozenGame.toonGegevens();
             }
             
@@ -113,7 +111,7 @@ public class MenuExample {
             System.out.println("Geef uw beoordeling voor graphics (1-5): ");
             int graphicsRating = scanner.nextInt();
 
-            review.setRatingGraphics(graphicsRating);
+            if (graphicsRating <6 && graphicsRating > 0 ) {review.setRatingGraphics(graphicsRating);}
 
             System.out.println("Geef uw beoordeling voor story (1-5): ");
             int storyRating = scanner.nextInt();
@@ -148,7 +146,7 @@ public class MenuExample {
         System.out.println("Kies een game uit: ");
         int gekozenGameIndex = scanner.nextInt() - 1;
         Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex > 0 && gekozenGameIndex < games.gamelijst.size()) {
+        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
@@ -198,7 +196,7 @@ public class MenuExample {
         System.out.println("U heeft gekozen voor uitverkoop.");
         System.out.println();
 
-       // games.printGamesByGenre();
+        // Voeg hier de functionaliteit toe voor Optie 3
 
         terugNaarHoofdmenu();
     }
@@ -264,6 +262,5 @@ public class MenuExample {
         Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         clearScreen();
-
     }
 }
