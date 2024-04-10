@@ -5,5 +5,5 @@ import java.util.List;
 public interface Question {
     String getText();
 
-    void answerQuestion();
+    String answerQuestion();
 }
