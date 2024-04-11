@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+import com.opencsv.CSVParserWriter;
+import com.opencsv.CSVWriter;
+
+import java.io.*;
 
 public class GameLibrary {
 
@@ -24,17 +28,84 @@ public class GameLibrary {
         for (Game game : gamelijst) {
             review.readFile(game);
         }
-        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonGegevens2).reversed());
+        
 
         
     
     }
 
-    public void printGamesByRating() {
+    public void writeGametofile(Game game) {
+        String filename = "games.csv";
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filename))) {
+            String [] data = {String.valueOf(game.getNaam()), String.valueOf(game.getJaarRelease()), String.valueOf(game.getGenre()), String.valueOf(game.getPrijs()) };
+            writer.writeNext(data);
+            System.out.println();
+            System.out.println("Game succesvol opgeslagen");
+        }
+        catch (IOException e) {
+            System.err.println("Er is iets missgegaan " + e.getMessage());
+
+        }
+        
+    }
+    public void readGames() {
+
+
+        String fileName = "games.csv";
+
+
+        BufferedReader reader = null;
+        String line = "";
+
+        try {
+            reader = new BufferedReader(new FileReader(fileName));
+            while ((line = reader.readLine()) != null) {
+                String[] allewaardes = line.split(",");
+                if (allewaardes.length == 4) { // Ensure there are exactly three values in each line
+                    String naam = Integer.parseInt(allewaardes[0].replaceAll("\"", ""));
+                    int ratingStory = Integer.parseInt(allewaardes[1].replaceAll("\"", ""));
+                    int ratingGameplay = Integer.parseInt(allewaardes[2].replaceAll("\"", ""));
+
+                    // Set the ratings to the values read from the file
+                    Game game = new Game(
+
+                } else {
+                    System.err.println("Invalid data format in CSV file: " + fileName);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading file: " + e.getMessage());
+        } catch (NumberFormatException e) {
+            System.err.println("Error parsing integer from file: " + e.getMessage());
+        } finally {
+            try {
+                if (reader != null)
+                    reader.close();
+            } catch (IOException e) {
+                System.err.println("Error closing file: " + e.getMessage());
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+    public ArrayList <Game> printGamesByRating() {
+        ArrayList <Game> gamesoprating = new ArrayList<Game>();
 
         for (Game game : gamelijst) {
-            System.out.println(game.getNaam() + " - Rating: " + game.toonGegevens2());
+            gamesoprating.add(game);
+
         }
+        Collections.sort(gamesoprating, Comparator.comparingDouble(Game::toonGegevens2).reversed());
+        return gamesoprating;
     }
     
 

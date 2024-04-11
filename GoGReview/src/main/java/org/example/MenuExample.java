@@ -2,6 +2,7 @@ package org.example;
 
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
 public class MenuExample {
     static GameLibrary games = new GameLibrary();
@@ -141,12 +142,19 @@ public class MenuExample {
         Review review = new Review();
         System.out.println("U heeft gekozen voor ranglijst games.");
         System.out.println();
-        games.printGamesByRating();
+        ArrayList <Game> gamesoprating = games.printGamesByRating();
         System.out.println();
         System.out.println("Kies een game uit: ");
+        int i = 1;
+        for (Game game : gamesoprating) {
+            
+            System.out.println (i + ". "+ game.getNaam() + ", Rating: " +game.getRating() + " , prijs: $" + game.getPrijs() );
+            i++;
+        }
+
         int gekozenGameIndex = scanner.nextInt() - 1;
         Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+        if (gekozenGameIndex >= 0 && gekozenGameIndex < gamesoprating.size()) {
 
             clearScreen();
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
@@ -182,7 +190,8 @@ public class MenuExample {
             //e.printStackTrace();
             //  }
 
-        } else { terugNaarHoofdmenu();}
+        } 
+        
 
 
     }
