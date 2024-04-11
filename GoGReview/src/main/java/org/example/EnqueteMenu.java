@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 public class EnqueteMenu {
 
+    private final static String EnquetePath = "Enquetes";
+
     public static void Menu() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -40,7 +42,10 @@ public class EnqueteMenu {
 
     private static void optie1(Scanner scanner) {
         ArrayList<Enquete> enquetes = new ArrayList<>();
-        File directory = new File("Enquetes");
+        File directory = new File(EnquetePath);
+        if(!directory.exists()) {
+            directory.mkdir();
+        }
         File[] files = directory.listFiles();
         if(files != null) {
             for(File file : files) {
@@ -73,7 +78,7 @@ public class EnqueteMenu {
                     running = false;
                 }
             }
-            enquetes.get(choice - 1).takeQuiz();
+            enquetes.get(choice - 1).takeQuiz(scanner);
         }
     }
 
@@ -116,7 +121,11 @@ public class EnqueteMenu {
             }
         }
         try {
-            FileOutputStream fout = new FileOutputStream("Enquetes\\" + name + ".ser");
+            File directory = new File(EnquetePath);
+            if(!directory.exists()) {
+                directory.mkdir();
+            }
+            FileOutputStream fout = new FileOutputStream(EnquetePath + "/" + name + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(enquete);
         } catch (IOException e) {

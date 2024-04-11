@@ -1,5 +1,9 @@
 package org.example;
 
+import com.opencsv.CSVWriter;
+
+import java.util.Scanner;
+
 public class OpenQuestion implements Question {
     private String text;
 
@@ -12,8 +16,9 @@ public class OpenQuestion implements Question {
     }
 
     @Override
-    public String[] answerQuestion() {
-        // TODO
-        return null;
+    public void answerQuestion(Scanner scanner, CSVWriter writer) {
+        System.out.println(this.text);
+        String answer = scanner.nextLine();
+        writer.writeNext(new String[]{this.text, answer});
     }
 }

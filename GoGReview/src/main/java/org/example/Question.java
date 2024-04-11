@@ -1,9 +1,12 @@
 package org.example;
 
-import java.util.List;
+import com.opencsv.CSVWriter;
 
-public interface Question {
+import java.io.Serializable;
+import java.util.Scanner;
+
+public interface Question extends Serializable {
     String getText();
 
-    String[] answerQuestion();
+    void answerQuestion(Scanner scanner, CSVWriter writer);
 }
