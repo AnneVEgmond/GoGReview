@@ -7,39 +7,39 @@ public class Game {
     private String naam;
     private int jaarRelease;
     private String genre;
-    private int aantalSpelers;
+    private boolean sale;
     private double gemiddeldeRating;
     private double prijs;
-    private int minimaleLeeftijd;
-    private String maker;
-    private String beschrijving;
     private ArrayList<Review> reviews; 
 
 
 
     //constructors
-    public Game(String naam, Double prijs, int jaarRelease, String genre) {
+    public Game(String naam, Double prijs, int jaarRelease, String genre, boolean sale) {
         this.naam = naam;
         this.jaarRelease = jaarRelease;
         this.genre = genre;
         this.prijs = prijs;
-        this.reviews = new ArrayList<>(); // Initialize ArrayList
+        this.sale = sale;
+        this.reviews = new ArrayList<>(); 
 
 
        }
 
     public Game () {
+        
 
     }
+    public Game(String naam, int jaarRelease, String genre) {
+        this.naam = naam;
+        this.jaarRelease = jaarRelease;
+        this.genre = genre;
+        this.reviews = new ArrayList<>(); 
 
 
+       }
 
 
-    //SETTERS AND GETTERS
-
-    public void setMinimaleLeeftijd(int minimaleLeeftijd) {
-        this.minimaleLeeftijd = minimaleLeeftijd; 
-    }
 
 
     public void setPrijs(double prijs) {
@@ -47,9 +47,6 @@ public class Game {
     }
 
 
-    public void setAantalSpelers(int aantalSpelers) {
-        this.aantalSpelers = aantalSpelers;   
-    }
 
 
     public void setJaarRelease(int jaarRelease) {
@@ -67,26 +64,12 @@ public class Game {
         this.genre = genre;
     }
 
-    public void setMaker(String maker) {
-        this.maker = maker;
-    }
-
-
-    public void setBeschrijving (String bescrhijving) {
-        this.beschrijving = bescrhijving;
-    }
-
-    public int getMinimaleLeeftijd() {
-        return minimaleLeeftijd;
-    }
+    
 
     public double getPrijs() {
         return prijs;
     }
 
-    public int getAantalSpelers() {
-        return aantalSpelers;
-    }
 
     public int getJaarRelease() {
         return jaarRelease;
@@ -100,12 +83,12 @@ public class Game {
         return genre;
     }
 
-    public String getMaker() {
-        return maker;
+    public boolean getSale() {
+        return sale;
     }
 
-    public String getBeschrijving() {
-        return beschrijving;
+    public void setSale(boolean sale) {
+        this.sale = sale;
     }
 
 
@@ -152,19 +135,13 @@ public class Game {
         System.out.println();
         System.out.println(naam + " (" + jaarRelease + ")");
         System.out.println();
-        System.out.println("Minimale leeftijd: " + minimaleLeeftijd);
-        System.out.println();
-        System.out.println("Maker: " + maker);
-        System.out.println();
         System.out.printf("Rating: %.1f\n",calculateAverageRating());
         System.out.println();
         System.out.println("genre: " + genre);
-        System.out.println();
-        System.out.println("Beschrijving: ");
-        System.out.println(beschrijving);
+        
     }
 
-    public double  toonGegevens2() {
+    public double toonrating() {
         return calculateAverageRating();
 
     }
