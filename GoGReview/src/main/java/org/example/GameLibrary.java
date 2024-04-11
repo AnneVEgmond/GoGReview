@@ -62,12 +62,14 @@ public class GameLibrary {
             while ((line = reader.readLine()) != null) {
                 String[] allewaardes = line.split(",");
                 if (allewaardes.length == 4) { // Ensure there are exactly three values in each line
-                    String naam = Integer.parseInt(allewaardes[0].replaceAll("\"", ""));
-                    int ratingStory = Integer.parseInt(allewaardes[1].replaceAll("\"", ""));
-                    int ratingGameplay = Integer.parseInt(allewaardes[2].replaceAll("\"", ""));
-
+                    String naam = allewaardes[0].replaceAll("\"", "");
+                    int jaarrelease = Integer.parseInt(allewaardes[1].replaceAll("\"", ""));
+                    String genre = allewaardes[2].replaceAll("\"", "");
+                    Double prijs = Double.parseDouble(allewaardes[3].replaceAll("\"", ""));
                     // Set the ratings to the values read from the file
-                    Game game = new Game(
+                    
+                    Game game = new Game(naam, prijs, jaarrelease , genre);
+                    
 
                 } else {
                     System.err.println("Invalid data format in CSV file: " + fileName);
