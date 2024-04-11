@@ -1,14 +1,16 @@
 package org.example;
 
-import java.io.*;
-import java.util.ArrayList;
 import com.opencsv.CSVWriter;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Review {
     private int ratingGraphics;
     private int ratingStory;
     private int ratingGameplay;
-
 
     public Review(int ratingGraphics, int ratingStory, int ratingGameplay) {
         this.ratingGraphics = ratingGraphics;
@@ -16,29 +18,26 @@ public class Review {
         this.ratingGameplay = ratingGameplay;
 
     }
-    public Review () {
-
-    }
+    public Review() { }
 
     // Getter and setters
-
-    public int getRatingGraphics() {return ratingGraphics;}
+    public int getRatingGraphics() {
+        return ratingGraphics;
+    }
 
     public int getRatingStory() {
         return ratingStory;
     }
 
-    public int getRatingGameplay () {
+    public int getRatingGameplay() {
         return ratingGameplay;
     }
 
-
-    public void setRatingGameplay (int ratingGameplay) {
+    public void setRatingGameplay(int ratingGameplay) {
         this.ratingGameplay = ratingGameplay;
-
     }
 
-    public void setRatingStory (int ratingStory) {
+    public void setRatingStory(int ratingStory) {
         this.ratingStory = ratingStory;
     }
 
@@ -46,11 +45,19 @@ public class Review {
         this.ratingGraphics = ratingGraphics;
     }
 
-    // Method to write reviews to a file
+    /**
+     * Deze method schrijft de data van deze review naar een file.
+     *
+     * @param gekozenGame Specificeerd voor welke game de review is
+     */
     public void writeReviewToFile(Game gekozenGame) {
         String fileName = gekozenGame.getNaam() + "_reviews.csv";
         try (CSVWriter writer = new CSVWriter(new FileWriter(fileName, true))) {
-            String[] data = {String.valueOf(ratingGraphics), String.valueOf(ratingStory), String.valueOf(ratingGameplay)};
+            String[] data = {
+                    String.valueOf(ratingGraphics),
+                    String.valueOf(ratingStory),
+                    String.valueOf(ratingGameplay)
+            };
             writer.writeNext(data);
             System.out.println();
             System.out.println("Review is succesvol opgeslagen.");
@@ -61,14 +68,9 @@ public class Review {
 
 
     public void readFile(Game gekozenGame) {
-
-
         String fileName = gekozenGame.getNaam() + "_reviews.csv";
-
-
         BufferedReader reader = null;
         String line = "";
-
         try {
             reader = new BufferedReader(new FileReader(fileName));
             while ((line = reader.readLine()) != null) {
@@ -92,12 +94,12 @@ public class Review {
             System.err.println("Error parsing integer from file: " + e.getMessage());
         } finally {
             try {
-                if (reader != null)
+                if (reader != null) {
                     reader.close();
+                }
             } catch (IOException e) {
                 System.err.println("Error closing file: " + e.getMessage());
             }
         }
     }
-    
 }

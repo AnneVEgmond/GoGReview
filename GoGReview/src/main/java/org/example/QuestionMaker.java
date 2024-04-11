@@ -5,8 +5,8 @@ import java.util.Scanner;
 /**
  * Utility class
  *
- * Needs to be a separate class because a ConditionalQuestion can call on a different ConditionalQuestion.
- * To provide this recursive functionality, a crude factory class needs to be made.
+ * Dit moet een aparte klasse zijn zodat het mogelijk is voor een conditionele
+ * vraag altijd een vraag toe te voegen bij een antwoord.
  */
 public class QuestionMaker {
 
@@ -25,17 +25,17 @@ public class QuestionMaker {
         System.out.println("Vul tweede antwoord in:");
         question.addAnswer(scanner.nextLine());
         boolean runningOuter = true;
-        while(runningOuter) {
+        while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");
             String input = scanner.nextLine();
-            if(input.equals("J")) {
+            if (input.equals("J")) {
                 System.out.println("Vul het derde antwoord in:");
                 question.addAnswer(scanner.nextLine());
                 boolean runningInner = true;
-                while(runningInner) {
+                while (runningInner) {
                     System.out.println("Wilt u een vierde antwoord toevoegen? (J/N)");
                     input = scanner.nextLine();
-                    if(input.equals("J")) {
+                    if (input.equals("J")) {
                         System.out.println("Vul het vierde antwoord in:");
                         question.addAnswer(scanner.nextLine());
                         runningInner = false;
@@ -46,7 +46,7 @@ public class QuestionMaker {
                     }
                 }
                 runningOuter = false;
-            } else if(input.equals("N")) {
+            } else if (input.equals("N")) {
                 runningOuter = false;
             } else {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -64,17 +64,17 @@ public class QuestionMaker {
         System.out.println("Vul tweede antwoord in:");
         question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
         boolean runningOuter = true;
-        while(runningOuter) {
+        while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");
             String input = scanner.nextLine();
-            if(input.equals("J")) {
+            if (input.equals("J")) {
                 System.out.println("Vul het derde antwoord in:");
                 question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
                 boolean runningInner = true;
-                while(runningInner) {
+                while (runningInner) {
                     System.out.println("Wilt u een vierde antwoord toevoegen? (J/N)");
                     input = scanner.nextLine();
-                    if(input.equals("J")) {
+                    if (input.equals("J")) {
                         System.out.println("Vul het vierde antwoord in:");
                         question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
                         runningInner = false;
@@ -85,7 +85,7 @@ public class QuestionMaker {
                     }
                 }
                 runningOuter = false;
-            } else if(input.equals("N")) {
+            } else if (input.equals("N")) {
                 runningOuter = false;
             } else {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -97,10 +97,10 @@ public class QuestionMaker {
     private static Question follupQuestion(Scanner scanner) {
         Question result = null;
         boolean runningOuter = true;
-        while(runningOuter) {
+        while (runningOuter) {
             System.out.println("Wilt u bij dit antwoord doorvragen? (J/N)");
             String input = scanner.nextLine();
-            if(input.equals("J")) {
+            if (input.equals("J")) {
                 boolean runningInner = true;
                 while (runningInner) {
                     System.out.println("Wat voor vraag wilt u toevoegen?");
