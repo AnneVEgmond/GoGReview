@@ -6,7 +6,6 @@ import java.util.Comparator;
 import java.util.Scanner;
 import com.opencsv.CSVParserWriter;
 import com.opencsv.CSVWriter;
-import file
 
 import java.io.*;
 
@@ -32,7 +31,7 @@ public class GameLibrary {
             String [] data = {String.valueOf(game.getNaam()), String.valueOf(game.getJaarRelease()), String.valueOf(game.getGenre()), String.valueOf(game.getPrijs()) };
             writer.writeNext(data);
             System.out.println();
-            System.out.println("Game succesvol opgeslagen");
+            System.out.println("GameLijst succesvol bewerkt");
         }
         catch (IOException e) {
             System.err.println("Er is iets missgegaan " + e.getMessage());
@@ -149,9 +148,36 @@ public class GameLibrary {
         String currentLine;
 
         try { 
+            FileWriter fw = new FileWriter(temp,true);
 
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+
+            FileReader fr = new FileReader(filepath);
+            BufferedReader br = new BufferedReader(fr);
+
+            while((currentLine = br.readLine()) !=null);
+            {
+                line++;
+
+                if (gameIndex != line)
+                {
+                    pw.println(currentLine);
+                }
+            }
+            pw.flush();
+            pw.close();
+            fr.close();
+            br.close();
+            bw.close();
+            fw.close();
+
+            oldfile.delete();
+            File dump = new File(filepath);
+            newfile.renameTo(dump);
         }
-        catch (Exception e) {
-
+        catch(Exception e){
+            System.out.println(e);
+        }
     }
 }
