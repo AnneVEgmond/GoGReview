@@ -18,15 +18,11 @@ public class Game {
 
 
     //constructors
-    public Game(String naam, int jaarRelease, String genre, int aantalSpelers, double prijs, int minimaleLeeftijd, String maker, String beschrijving) {
+    public Game(String naam, Double prijs, int jaarRelease, String genre) {
         this.naam = naam;
         this.jaarRelease = jaarRelease;
         this.genre = genre;
-        this.aantalSpelers = aantalSpelers;
         this.prijs = prijs;
-        this.minimaleLeeftijd = minimaleLeeftijd;
-        this.maker = maker;
-        this.beschrijving = beschrijving;
         this.reviews = new ArrayList<>(); // Initialize ArrayList
 
 
