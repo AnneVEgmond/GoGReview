@@ -8,7 +8,7 @@ public class ConditionalQuestion implements Question {
     }
 
     @Override
-    public String answerQuestion() {
+    public String[] answerQuestion() {
         //TODO
         return null;
     }

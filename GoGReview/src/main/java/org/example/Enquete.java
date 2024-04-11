@@ -16,6 +16,10 @@ public class Enquete implements Serializable {
         this.questions.add(question);
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void takeQuiz() {
         for (Question q :
                 this.questions) {
