@@ -7,9 +7,11 @@ import java.util.Scanner;
 
 public class GameLibrary {
 
-    ArrayList<Game> gamelijst = new ArrayList<Game>();
+    ArrayList<Game> gamelijst;
 
     public GameLibrary() {
+        gamelijst = new ArrayList<Game>();
+        Review review = new Review();
         Game gta3= new Game ("Grand Theft auto 3", 2001, "Action", 1, 60.0, 18, "Rockstar Games", "Welcome to Liberty City. Where it all began. The critically acclaimed blockbuster Grand Theft Auto III brings to life the dark and seedy underworld of Liberty City. With a massive and diverse open world, a wild cast of characters from every walk of life, and the freedom to explore at will, Grand Theft Auto III puts the dark, intriguing, and ruthless world of crime at your fingertips." );
         gamelijst.add(gta3);
 
@@ -18,18 +20,19 @@ public class GameLibrary {
 
         Game starwars = new Game("starwars Battlefornt 2", 2005, "Shooter", 64, 15.99, 12, "Pandemic Studios" ,"Star Wars: Battlefront II is a 2005 first and third-person shooter video game based on the Star Wars film franchise. Developed by Pandemic Studios and published by LucasArts, it is a sequel to 2004's Star Wars: Battlefront and the second installment in the Star Wars: Battlefront series." );
         gamelijst.add(starwars);
+
+        for (Game game : gamelijst) {
+            review.readFile(game);
+        }
+        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonGegevens2).reversed());
+
+        
     
     }
 
     public void printGamesByRating() {
-        Review review = new Review();
-      
-        // Sort the games by rating
-        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonGegevens2).reversed());
-        // Print the sorted list
-        for (Game game : gamelijst) {
-            review.readFile(game);
 
+        for (Game game : gamelijst) {
             System.out.println(game.getNaam() + " - Rating: " + game.toonGegevens2());
         }
     }
