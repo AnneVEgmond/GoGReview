@@ -21,8 +21,10 @@ public class MenuExample {
             clearScreen();
             printMenu();
             System.out.print("Voer uw keuze in: ");
+            
             int choice = scanner.nextInt();
-            scanner.nextLine();
+            System.out.println("");
+            
 
             switch (choice) {
                 case 1:
@@ -43,14 +45,15 @@ public class MenuExample {
                     System.out.println("Programma wordt afgesloten.");
                     break;
                 case 9:
-                    optie9();
+                optie9();
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
             }
         }
+        terugNaarHoofdmenu();
 
-        scanner.close();
+        
     }
 
     private void printMenu() {
@@ -229,35 +232,57 @@ public class MenuExample {
 
         System.out.print("Voer uw keuze in: ");
         int keuze = scanner.nextInt();
-        scanner.nextLine();
+        
 
         switch (keuze) {
             case 1:
-            games.voegGameToe();
+            Game game = new Game();
+            Scanner keyboard = new Scanner(System.in);
+            System.out.println ("Welke game wilt u toevoegen?");
+            String naam = keyboard.nextLine();
+            game.setNaam(naam);
+
+            System.out.println ("Wat is het releaseJaar?");
+            int jaarRelease = keyboard.nextInt();
+            game.setJaarRelease(jaarRelease);
+
+            keyboard.nextLine();
+
+            System.out.println ("Wat is het genre?");
+            String genre = keyboard.nextLine();
+            game.setGenre(genre);
+
+            System.out.println ("Wat is de prijs?");
+            double prijs = keyboard.nextDouble();
+            game.setPrijs(prijs);
+            games.voegGameToe(game);
+            
         
                 break;
             case 2:
                 games.printGamelijst();
                 System.out.println("Welke game wilt u verwijderen?");
                 int gameIndex = scanner.nextInt();
-                scanner.nextLine();
+                
                 games.verwijderGame(gameIndex);
                 break;
             case 3:
                 games.printGamelijst();
                 System.out.println("Van welke game wilt u de reviews lezen?");
                 int gameIndex2 = scanner.nextInt();
-                scanner.nextLine();
-                // Hier moet verder gewerkt worden aan review klasse
+                
+            
 
                 break;
             case 9:
+             
                 break;
             default:
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
         }
-
         terugNaarHoofdmenu();
+        clearScreen();
+
     }
 
     private static void terugNaarHoofdmenu() {
@@ -266,6 +291,7 @@ public class MenuExample {
         System.out.println("Druk op Enter om terug te gaan naar het hoofdmenu.");
         scanner.nextLine();
         clearScreen();
+        
     }
 
     private static void terugNaarHoofdmenu2() {

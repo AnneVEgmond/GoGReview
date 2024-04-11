@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.Scanner;
 import com.opencsv.CSVParserWriter;
 import com.opencsv.CSVWriter;
+import file
 
 import java.io.*;
 
@@ -27,7 +28,7 @@ public class GameLibrary {
 
     public void writeGametofile(Game game) {
         String filename = "games.csv";
-        try (CSVWriter writer = new CSVWriter(new FileWriter(filename))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filename, true))) {
             String [] data = {String.valueOf(game.getNaam()), String.valueOf(game.getJaarRelease()), String.valueOf(game.getGenre()), String.valueOf(game.getPrijs()) };
             writer.writeNext(data);
             System.out.println();
@@ -127,34 +128,30 @@ public class GameLibrary {
 
 
     //Dit is de methode om nieuwe games toe te voegen aan de lijst
-    public void voegGameToe() {
-        Game game = new Game();
-        Scanner keyboard = new Scanner(System.in);
-        System.out.println ("Welke game wilt u toevoegen?");
-        String naam = keyboard.nextLine();
-        game.setNaam(naam);
-
-        System.out.println ("Wat is het releaseJaar?");
-        int jaarRelease = keyboard.nextInt();
-        game.setJaarRelease(jaarRelease);
-
+    public void voegGameToe(Game game) {
         
-
-        System.out.println ("Wat is het genre?");
-        String genre = keyboard.nextLine();
-        game.setGenre(genre);
-
-        System.out.println ("Wat is de prijs?");
-        double prijs = keyboard.nextDouble();
-        game.setPrijs(prijs);
 
         gamelijst.add(game);
         writeGametofile(game);
 
-        keyboard.close();
+        
+
     }
 
     public void verwijderGame (int gameIndex) {
         gamelijst.remove(gameIndex-1);
+        String temp = "temp.csv";
+        String filepath = "games.csv";
+        File oldfile = new File(filepath);
+        File newfile = new File(temp);
+
+        int line = 0;
+        String currentLine;
+
+        try { 
+
+        }
+        catch (Exception e) {
+
     }
 }
