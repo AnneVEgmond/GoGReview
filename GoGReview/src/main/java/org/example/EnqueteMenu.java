@@ -1,9 +1,7 @@
 package org.example;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class EnqueteMenu {
@@ -23,7 +21,7 @@ public class EnqueteMenu {
 
             switch(choice) {
                 case 1:
-                    optie1();
+                    optie1(scanner);
                     break;
                 case 2:
                     optie2(scanner);
@@ -40,8 +38,43 @@ public class EnqueteMenu {
         }
     }
 
-    private static void optie1() {
-        System.out.println("TODO");
+    private static void optie1(Scanner scanner) {
+        ArrayList<Enquete> enquetes = new ArrayList<>();
+        File directory = new File("Enquetes");
+        File[] files = directory.listFiles();
+        if(files != null) {
+            for(File file : files) {
+                try {
+                    FileInputStream fin = new FileInputStream(file);
+                    ObjectInputStream in = new ObjectInputStream(fin);
+                    Enquete enquete = (Enquete) in.readObject();
+                    enquetes.add(enquete);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+        if(enquetes.isEmpty()) {
+            System.out.println("Er zijn op het moment geen enquêtes beschikbaar.");
+        } else {
+            System.out.println("Beschikbare enquêtes:");
+            for (int i = 0; i < enquetes.size(); i++) {
+                System.out.println((i+1) + ". " + enquetes.get(i).getName());
+            }
+            boolean running = true;
+            int choice = -1;
+            while(running) {
+                System.out.println("Voer uw keuze in:");
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if(choice <= enquetes.size() && choice >= 0) {
+                    running = false;
+                }
+            }
+            enquetes.get(choice - 1).takeQuiz();
+        }
     }
 
     private static void optie2(Scanner scanner) {
@@ -83,7 +116,7 @@ public class EnqueteMenu {
             }
         }
         try {
-            FileOutputStream fout = new FileOutputStream(name + ".ser");
+            FileOutputStream fout = new FileOutputStream("Enquetes\\" + name + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(enquete);
         } catch (IOException e) {

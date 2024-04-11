@@ -12,7 +12,7 @@ public class OpenQuestion implements Question {
     }
 
     @Override
-    public String answerQuestion() {
+    public String[] answerQuestion() {
         // TODO
         return null;
     }

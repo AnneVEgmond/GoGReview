@@ -24,7 +24,7 @@ public class MultiplechoiceQuestion implements Question {
     }
 
     @Override
-    public String answerQuestion() {
+    public String[] answerQuestion() {
         // TODO
         return null;
     }
