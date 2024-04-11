@@ -19,8 +19,8 @@ public class MenuExample {
         boolean running = true;
 
         while (running) {
-
             clearScreen();
+            
             printMenu();
             System.out.print("Voer uw keuze in: ");
             
@@ -192,6 +192,7 @@ public class MenuExample {
             review.writeReviewToFile(gekozenGame); // Write the review to a file
             System.out.println();
             System.out.println("Bedankt voor uw review!");
+            terugNaarHoofdmenu();
             
 
         } 
@@ -228,6 +229,7 @@ public class MenuExample {
         }
         System.out.println();
         System.out.println("Wilt u deze spel beoordelen? (J/N)");
+        scanner.nextLine();
         String keuze = scanner.nextLine();
 
         if (keuze.equalsIgnoreCase("J")) {
@@ -250,6 +252,7 @@ public class MenuExample {
             review.writeReviewToFile(gekozenGame); // Write the review to a file
             System.out.println();
             System.out.println("Bedankt voor uw review!");
+            terugNaarHoofdmenu();
             
         }
         
@@ -259,27 +262,64 @@ public class MenuExample {
          
          
          
-        private static void optie4() {
-            clearScreen();
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("U heeft gekozen voor genres bekijken");
-            System.out.println("Welke genre wilt u bekijken?");
-            String genre = scanner.nextLine();
-            System.out.println("heel");
-
-            ArrayList<Game> gamesopgenre = games.printGamesByGenre(genre);
-            int size = gamesopgenre.size();
-            if ( size == 0 ) {
-                System.out.println("er bestaan geen games van deze genre");
-            }
-
+    private static void optie4() {
+        clearScreen();
+        Scanner scanner = new Scanner(System.in);
+        Review review = new Review();
+        System.out.println("U heeft gekozen voor genres bekijken");
+        System.out.println("Welke genre wilt u bekijken?");
+        String genre = scanner.nextLine();
+        
+    
+        ArrayList<Game> gamesopgenre = games.printGamesByGenre(genre);
+        int size = gamesopgenre.size();
+        if (size == 0) {
+            System.out.println("Er bestaan geen games van dit genre");
+        } else {
+            int i = 1;
             for (Game game : gamesopgenre) {
-            System.out.printf(game.getNaam() + " %.1f\n" + ", $" + game.getPrijs(), game.calculateAverageRating());
+                System.out.printf(i +" %s, %.1f, $%.2f\n", game.getNaam(), game.calculateAverageRating(), game.getPrijs());
+                i++;
             }
-
         }
+        System.out.println("");
+        System.out.println("Welke game kiest u");
+        int gekozenGameIndex = scanner.nextInt() - 1;
+        Game gekozenGame = gamesopgenre.get(gekozenGameIndex);
+        if (gekozenGameIndex >= 0 && gekozenGameIndex <= gamesopgenre.size()) {
+            clearScreen();
+            System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
+        }
+        System.out.println();
+        System.out.println("Wilt u deze spel beoordelen? (J/N)");
+        scanner.nextLine();
+        String keuze = scanner.nextLine();
+
+        if (keuze.equalsIgnoreCase("J")) {
+            // hier functionaliteit om review te geven op een game.
+            review = new Review();
+
+            System.out.println("Geef uw beoordeling voor graphics (1-5): ");
+            int graphicsRating = scanner.nextInt();
+            review.setRatingGraphics(graphicsRating);
+
+            System.out.println("Geef uw beoordeling voor story (1-5): ");
+            int storyRating = scanner.nextInt();
+            review.setRatingStory(storyRating);
+
+            System.out.println("Geef uw beoordeling voor gameplay (1-5): ");
+            int gameplayRating = scanner.nextInt();
+            review.setRatingGameplay(gameplayRating);
 
 
+            review.writeReviewToFile(gekozenGame); // Write the review to a file
+            System.out.println();
+            System.out.println("Bedankt voor uw review!");
+            terugNaarHoofdmenu();
+
+
+    }
+}
 
         
     
@@ -394,9 +434,14 @@ public class MenuExample {
                 games.verwijderGame(gameIndex);
                 break;
             case 3:
-                games.printGamelijst();
-                System.out.println("Van welke game wilt u de reviews lezen?");
-                int gameIndex2 = scanner.nextInt();
+            clearScreen();
+                
+               ArrayList <Game> gamess = games.getGamelijst();
+                for (Game gamen : gamess) {
+                    System.out.printf(gamen.getNaam() + ": %.1f\n" + " $" + gamen.getPrijs(), gamen.calculateAverageRating());    
+                }
+                
+
                 break;
 
             case 4:
@@ -409,12 +454,11 @@ public class MenuExample {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
         }
         terugNaarHoofdmenu();
-        clearScreen();
 
     }
     
     private static void optieenquete(Scanner scanner) {
-        // TODO Clear screen
+        clearScreen();
         boolean running = true;
         System.out.println("Geef een naam aan de enquête: ");
         String name = "Enquete_" + scanner.nextLine();
