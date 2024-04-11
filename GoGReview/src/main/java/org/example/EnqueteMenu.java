@@ -41,6 +41,7 @@ public class EnqueteMenu {
     }
 
     private static void optie1(Scanner scanner) {
+        // TODO Clear screen
         ArrayList<Enquete> enquetes = new ArrayList<>();
         File directory = new File(EnquetePath);
         if(!directory.exists()) {
@@ -78,15 +79,18 @@ public class EnqueteMenu {
                     running = false;
                 }
             }
+            // TODO Clear screen
             enquetes.get(choice - 1).takeQuiz(scanner);
         }
     }
 
     private static void optie2(Scanner scanner) {
+        // TODO Clear screen
         boolean running = true;
         System.out.println("Geef een naam aan de enquête: ");
         String name = "Enquete_" + scanner.nextLine();
         Enquete enquete = new Enquete(name);
+        // TODO Clear screen
         while (running) {
             System.out.println("Wat voor vraag wilt u toevoegen?");
             System.out.println();
@@ -103,17 +107,21 @@ public class EnqueteMenu {
                 case 1:
                     enquete.addQuestion(QuestionMaker.createOpenQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
+                    // TODO Clear screen
                     break;
                 case 2:
                     enquete.addQuestion(QuestionMaker.createMultiplechoiceQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
+                    // TODO Clear screen
                     break;
                 case 3:
                     enquete.addQuestion(QuestionMaker.createConditionalQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
+                    // TODO Clear screen
                     break;
                 case 0:
                     running = false;
+                    // TODO Clear screen
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
