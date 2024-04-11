@@ -14,22 +14,13 @@ public class GameLibrary {
     ArrayList<Game> gamelijst;
 
     public GameLibrary() {
-        gamelijst = new ArrayList<Game>();
+        gamelijst = readGames();
         Review review = new Review();
-        Game gta3= new Game ("Grand Theft auto 3", 2001, "Action", 1, 60.0, 18, "Rockstar Games", "Welcome to Liberty City. Where it all began. The critically acclaimed blockbuster Grand Theft Auto III brings to life the dark and seedy underworld of Liberty City. With a massive and diverse open world, a wild cast of characters from every walk of life, and the freedom to explore at will, Grand Theft Auto III puts the dark, intriguing, and ruthless world of crime at your fingertips." );
-        gamelijst.add(gta3);
-
-        Game doom = new Game ("Doom", 1993, "Action", 1, 60.0, 18, "Bethesda Softworks", "Doom is a first-person shooter game developed and published by id Software. Released on December 10, 1993, for DOS, it is the first installment in the Doom franchise. The player assumes the role of a space marine, later unofficially referred to as Doomguy, fighting through hordes of undead humans and invading demons. The game begins on the moons of Mars and finishes in hell, with the player traversing each level to find its exit or defeat its final boss. It is an early example of 3D graphics in video games, and has enemies and objects as 2D images, a technique sometimes referred to as 2.5D graphics.");
-        gamelijst.add(doom);
-
-        Game starwars = new Game("starwars Battlefornt 2", 2005, "Shooter", 64, 15.99, 12, "Pandemic Studios" ,"Star Wars: Battlefront II is a 2005 first and third-person shooter video game based on the Star Wars film franchise. Developed by Pandemic Studios and published by LucasArts, it is a sequel to 2004's Star Wars: Battlefront and the second installment in the Star Wars: Battlefront series." );
-        gamelijst.add(starwars);
+        readGames();
 
         for (Game game : gamelijst) {
             review.readFile(game);
         }
-        
-
         
     
     }
@@ -48,7 +39,8 @@ public class GameLibrary {
         }
         
     }
-    public void readGames() {
+    public ArrayList<Game> readGames() {
+        ArrayList<Game> games = new ArrayList<Game>();
 
 
         String fileName = "games.csv";
@@ -69,7 +61,9 @@ public class GameLibrary {
                     // Set the ratings to the values read from the file
                     
                     Game game = new Game(naam, prijs, jaarrelease , genre);
-                    
+                    games.add(game);
+
+
 
                 } else {
                     System.err.println("Invalid data format in CSV file: " + fileName);
@@ -87,6 +81,7 @@ public class GameLibrary {
                 System.err.println("Error closing file: " + e.getMessage());
             }
         }
+        return games;
     }
 
 
@@ -143,39 +138,23 @@ public class GameLibrary {
         int jaarRelease = keyboard.nextInt();
         game.setJaarRelease(jaarRelease);
 
-        keyboard.nextLine(); // consume newline left-over
+        
 
         System.out.println ("Wat is het genre?");
         String genre = keyboard.nextLine();
         game.setGenre(genre);
 
-        System.out.println ("Hoeveel spelers zijn er?");
-        int aantalSpelers = keyboard.nextInt();
-        game.setAantalSpelers(aantalSpelers);
-
         System.out.println ("Wat is de prijs?");
         double prijs = keyboard.nextDouble();
         game.setPrijs(prijs);
 
-        System.out.println ("Wat is de minimale leeftijd?");
-        int minimaleLeeftijd = keyboard.nextInt();
-        game.setMinimaleLeeftijd(minimaleLeeftijd);
-
-        keyboard.nextLine(); // consume newline left-over
-
-        System.out.println ("Wie is de maker?");
-        String maker = keyboard.nextLine();
-        game.setMaker(maker);
-
-        System.out.println("Geef een beschrijving van de game");
-        String beschrijving = keyboard.nextLine();
-        game.setBeschrijving(beschrijving);
-
         gamelijst.add(game);
+        writeGametofile(game);
+
         keyboard.close();
     }
 
     public void verwijderGame (int gameIndex) {
-        gamelijst.remove(gameIndex);
+        gamelijst.remove(gameIndex-1);
     }
 }

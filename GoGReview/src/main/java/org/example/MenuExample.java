@@ -233,7 +233,8 @@ public class MenuExample {
 
         switch (keuze) {
             case 1:
-                games.voegGameToe();
+            games.voegGameToe();
+        
                 break;
             case 2:
                 games.printGamelijst();
