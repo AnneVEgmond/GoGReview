@@ -19,7 +19,7 @@ public class MenuExample {
         boolean running = true;
 
         while (running) {
-            clearScreen();
+            
             
             printMenu();
             System.out.print("Voer uw keuze in: ");
@@ -98,8 +98,9 @@ public class MenuExample {
         games.printGamelijst();
         System.out.println();
         System.out.println("Kies een game uit: ");
+        
         int gekozenGameIndex = scanner.nextInt()-1;
-            scanner.nextLine();
+            
             Game gekozenGame = games.getGame(gekozenGameIndex);
             if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
 
@@ -114,6 +115,7 @@ public class MenuExample {
             
         System.out.println();
         System.out.println("Wilt u deze spel beoordelen? (J/N)");
+        scanner.nextLine();
         String keuze = scanner.nextLine();
 
         if (keuze.equalsIgnoreCase("J")) {
@@ -169,6 +171,7 @@ public class MenuExample {
         }
         System.out.println();
         System.out.println("Wilt u deze spel beoordelen? (J/N)");
+        scanner.nextLine();
         String keuze = scanner.nextLine();
 
         if (keuze.equalsIgnoreCase("J")) {
@@ -438,7 +441,7 @@ public class MenuExample {
                 
                ArrayList <Game> gamess = games.getGamelijst();
                 for (Game gamen : gamess) {
-                    System.out.printf(gamen.getNaam() + ": %.1f\n" + " $" + gamen.getPrijs(), gamen.calculateAverageRating());    
+                    System.out.printf(gamen.getNaam() + ": %.1f" + " $" + gamen.getPrijs() + "\n", gamen.calculateAverageRating());    
                 }
                 
 
