@@ -10,9 +10,7 @@ public class Game {
     private boolean sale;
     private double gemiddeldeRating;
     private double prijs;
-    private ArrayList<Review> reviews; 
-
-
+    private ArrayList<Review> reviews;
 
     //constructors
     public Game(String naam, Double prijs, int jaarRelease, String genre, boolean sale) {
@@ -21,55 +19,37 @@ public class Game {
         this.genre = genre;
         this.prijs = prijs;
         this.sale = sale;
-        this.reviews = new ArrayList<>(); 
-
-
-       }
-
-    public Game () {
-        
-
+        this.reviews = new ArrayList<>();
     }
+
+    public Game() { }
+
     public Game(String naam, int jaarRelease, String genre) {
         this.naam = naam;
         this.jaarRelease = jaarRelease;
         this.genre = genre;
-        this.reviews = new ArrayList<>(); 
-
-
-       }
-
-
-
+        this.reviews = new ArrayList<>();
+    }
 
     public void setPrijs(double prijs) {
         this.prijs = prijs; 
     }
 
-
-
-
     public void setJaarRelease(int jaarRelease) {
         this.jaarRelease = jaarRelease;
     }
 
-
     public void setNaam(String naam) {
         this.naam = naam;
-
     }
-
 
     public void setGenre(String genre) {
         this.genre = genre;
     }
 
-    
-
     public double getPrijs() {
         return prijs;
     }
-
 
     public int getJaarRelease() {
         return jaarRelease;
@@ -91,9 +71,6 @@ public class Game {
         this.sale = sale;
     }
 
-
-
-
     public ArrayList<Review> getReviews() {
         return reviews;
     }
@@ -102,7 +79,7 @@ public class Game {
         this.reviews = reviews;
     }
 
-    public void setRating (double rating) {
+    public void setRating(double rating) {
         this.gemiddeldeRating = rating;
     }
 
@@ -120,30 +97,24 @@ public class Game {
         }
 
         for (Review review : reviews) {
-
-
             totalRating += (review.getRatingGraphics() + review.getRatingStory() + review.getRatingGameplay()) / 3.0;
         }
 
-        setRating(totalRating/numReviews);
+        setRating(totalRating / numReviews);
         return totalRating / numReviews;
     }
-
-
 
     public void toonGegevens() {
         System.out.println();
         System.out.println(naam + " (" + jaarRelease + ")");
         System.out.println();
-        System.out.printf("Rating: %.1f\n",calculateAverageRating());
+        System.out.printf("Rating: %.1f\n", calculateAverageRating());
         System.out.println();
         System.out.println("genre: " + genre);
-        
     }
 
     public double toonrating() {
         return calculateAverageRating();
-
     }
 }
 
