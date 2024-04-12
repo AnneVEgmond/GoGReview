@@ -149,31 +149,29 @@ public class GameLibrary {
 
 
 
-    public void verwijderGame (int gameIndex) {
-        gamelijst.remove(gameIndex-1);
+    public void verwijderGame(int gameIndex) {
+        gamelijst.remove(gameIndex - 1);
         String temp = "temp.csv";
         String filepath = "games.csv";
         File oldfile = new File(filepath);
         File newfile = new File(temp);
-
+    
         int line = 0;
         String currentLine;
-
-        try { 
-            FileWriter fw = new FileWriter(temp,true);
-
+    
+        try {
+            FileWriter fw = new FileWriter(temp);
+    
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-
+    
             FileReader fr = new FileReader(filepath);
             BufferedReader br = new BufferedReader(fr);
-
-            while((currentLine = br.readLine()) !=null);
-            {
+    
+            while ((currentLine = br.readLine()) != null) {
                 line++;
-
-                if (gameIndex != line)
-                {
+    
+                if (gameIndex != line) {
                     pw.println(currentLine);
                 }
             }
@@ -183,13 +181,18 @@ public class GameLibrary {
             br.close();
             bw.close();
             fw.close();
-
-            oldfile.delete();
+    
+            if (!oldfile.delete()) {
+                System.out.println("Failed to delete the old file.");
+                return;
+            }
             File dump = new File(filepath);
-            newfile.renameTo(dump);
-        }
-        catch(Exception e){
+            if (!newfile.renameTo(dump)) {
+                System.out.println("Failed to rename the new file.");
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
+    
 }

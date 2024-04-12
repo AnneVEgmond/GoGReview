@@ -374,6 +374,7 @@ public class MenuExample {
                     System.out.println("Wat is de prijs?");
                     double prijs = keyboard.nextDouble();
                     game.setPrijs(prijs);
+                    scanner.nextLine();
 
                     System.out.println("Is deze game in de sale? J/N?");
 
