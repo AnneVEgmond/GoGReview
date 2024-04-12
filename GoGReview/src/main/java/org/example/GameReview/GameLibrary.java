@@ -76,7 +76,7 @@ public class GameLibrary {
 
 
     public ArrayList<Game> printgamesmetkorting() {
-        ArrayList<Game> gamesmetkorting = new ArrayList<Game>();
+        ArrayList<Game> gamesmetkorting = new ArrayList<>();
         for (Game game : gamelijst) {
             if(game.getSale()) {
                 gamesmetkorting.add (game);
@@ -108,14 +108,12 @@ public class GameLibrary {
             System.out.println( ( i+1) + " " + gamelijst.get(i).getNaam());
         }
     }
+
     public ArrayList <Game> printGamesByRating() {
-        
-        
         Collections.sort(gamelijst, Comparator.comparingDouble(Game::calculateAverageRating).reversed());
         ArrayList <Game> games = new ArrayList<>();
 
         for (Game game : gamelijst) {
-            
             games.add(game);
         }
         return games;

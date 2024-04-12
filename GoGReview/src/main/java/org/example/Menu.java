@@ -133,7 +133,13 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor alle games bekijken.");
-        // Voeg hier de functionaliteit toe voor Optie 1
+
+        if (games.getGamelijst().isEmpty()) {
+            System.out.println("Er zijn op het moment geen games in het assortiment");
+            terugNaarHoofdmenu();
+            return;
+        }
+
         System.out.println();
         games.printGamelijst();
         System.out.println();
@@ -163,7 +169,7 @@ public class Menu {
             System.out.println("Geef uw beoordeling voor graphics (1-5): ");
             int graphicsRating = scanner.nextInt();
 
-            if (graphicsRating <6 && graphicsRating > 0 ) {review.setRatingGraphics(graphicsRating);}
+            if (graphicsRating < 6 && graphicsRating > 0 ) {review.setRatingGraphics(graphicsRating);}
 
             System.out.println("Geef uw beoordeling voor story (1-5): ");
             int storyRating = scanner.nextInt();
@@ -177,7 +183,9 @@ public class Menu {
             System.out.println();
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
-        } else if (keuze.equalsIgnoreCase("N")){ terugNaarHoofdmenu();}
+        } else if (keuze.equalsIgnoreCase("N")){
+            terugNaarHoofdmenu();
+        }
     }
 
     private static void ranglijstGames(GameLibrary games) {
@@ -187,6 +195,11 @@ public class Menu {
         System.out.println("U heeft gekozen voor ranglijst games.");
         System.out.println();
         ArrayList <Game> gamesoprating = games.printGamesByRating();
+        if (gamesoprating.isEmpty()) {
+            System.out.println("Er zijn op het moment geen games in het assortiment");
+            terugNaarHoofdmenu();
+            return;
+        }
         int i = 1;
         for (Game game : gamesoprating) {
             System.out.printf(i + ". " + game.getNaam() + "  %.1f  $"  + game.getPrijs() + "\n", game.getRating());
@@ -231,11 +244,16 @@ public class Menu {
     private static void uitverkoop(GameLibrary games) {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
-        Review review = new Review();
+        Review review;
         System.out.println("U heeft gekozen voor uitverkoop.");
          
         ArrayList<Game> gamesmetkorting = games.printgamesmetkorting();
-        
+        if(gamesmetkorting.isEmpty()) {
+            System.out.println("Er zijn op het moment geen games met korting");
+            terugNaarHoofdmenu();
+            return;
+        }
+
         int i = 1;
         for (Game game : gamesmetkorting) {
             System.out.printf(i +" " + game.getNaam() + " " + game.getJaarRelease() + " genre: " + game.getGenre() + " $"  + game.getPrijs() +" %.1f\n", game.calculateAverageRating());
@@ -283,6 +301,11 @@ public class Menu {
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor genres bekijken");
+        if(games.getGamelijst().isEmpty()) {
+            System.out.println("Er zijn op het moment geen games in het assortiment");
+            terugNaarHoofdmenu();
+            return;
+        }
         System.out.println("Welke genre wilt u bekijken?");
         String genre = scanner.nextLine();
 
@@ -373,6 +396,7 @@ public class Menu {
             }
             enquetes.get(choice - 1).takeQuiz(scanner);
         }
+        terugNaarHoofdmenu();
     }
 
     private static void retroGameSpelen() {
