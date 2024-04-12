@@ -110,21 +110,20 @@ public class QuestionMaker {
                     System.out.println("3. Conditionele vraag");
                     System.out.println();
                     System.out.println("Voer uw keuze in:");
-                    int choice = scanner.nextInt();
-                    scanner.nextLine();
+                    String choice = scanner.nextLine();
 
                     switch (choice) {
-                        case 1:
+                        case "1":
                             result = QuestionMaker.createOpenQuestion(scanner);
                             System.out.println("Vraag is toegevoegd!");
                             runningInner = false;
                             break;
-                        case 2:
+                        case "2":
                             result = QuestionMaker.createMultiplechoiceQuestion(scanner);
                             System.out.println("Vraag is toegevoegd!");
                             runningInner = false;
                             break;
-                        case 3:
+                        case "3":
                             result = QuestionMaker.createConditionalQuestion(scanner);
                             System.out.println("Vraag is toegevoegd!");
                             runningInner = false;

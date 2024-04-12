@@ -87,7 +87,7 @@ public class GameLibrary {
 
     public ArrayList<Game> printGamesByGenre(String genre) {
         
-        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonrating).reversed());
+        Collections.sort(gamelijst, Comparator.comparingDouble(Game::calculateAverageRating).reversed());
         ArrayList<Game> gamesopgenre = new ArrayList<Game>();
         for (Game game : gamelijst) {
             if (game.getGenre().equalsIgnoreCase(genre)) {
@@ -111,7 +111,7 @@ public class GameLibrary {
     public ArrayList <Game> printGamesByRating() {
         
         
-        Collections.sort(gamelijst, Comparator.comparingDouble(Game::toonrating).reversed());
+        Collections.sort(gamelijst, Comparator.comparingDouble(Game::calculateAverageRating).reversed());
         ArrayList <Game> games = new ArrayList<>();
 
         for (Game game : gamelijst) {

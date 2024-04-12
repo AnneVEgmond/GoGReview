@@ -16,8 +16,7 @@ import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class MenuExample {
-    //private final static GameLibrary games = new GameLibrary();
+public class Menu {
     private final static String ResourcePath = "src/main/resources";
 
     private static void clearScreen() {
@@ -25,7 +24,7 @@ public class MenuExample {
         System.out.flush();
     }
 
-    public MenuExample() {
+    public Menu() {
         // Initialize the resource folder
         File directory = new File(ResourcePath);
         if (!directory.exists()) {
@@ -45,7 +44,7 @@ public class MenuExample {
         }
 
         // Initialize the quiz answers folder
-        directory = new File(ResourcePath + "/EnquetesAnswers");
+        directory = new File(ResourcePath + "/EnqueteAnswers");
         if (!directory.exists()) {
             directory.mkdir();
         }
@@ -69,33 +68,33 @@ public class MenuExample {
         while (running) {
             printMenu();
             System.out.print("Voer uw keuze in: ");
-            int choice = scanner.nextInt();
+            String choice = scanner.nextLine();
             System.out.println();
 
             switch (choice) {
-                case 1:
+                case "1":
                     alleGamesBekijken(games);
                     break;
-                case 2:
+                case "2":
                     ranglijstGames(games);
                     break;
-                case 3:
+                case "3":
                     uitverkoop(games);
                     break;
-                case 4:
+                case "4":
                     genresBekijken(games);
                     break;
-                case 5:
+                case "5":
                     vulEnqueteIn();
                     break;
-                case 6:
+                case "6":
                     retroGameSpelen();
                     break;
-                case 8:
+                case "8":
                     running = false;
                     System.out.println("Programma wordt afgesloten.");
                     break;
-                case 9:
+                case "9":
                     adminMenu(games);
                     break;
                 default:
@@ -299,43 +298,41 @@ public class MenuExample {
                 i++;
             }
             System.out.println("");
-        System.out.println("Welke game kiest u");
-        int gekozenGameIndex = scanner.nextInt() - 1;
-        Game gekozenGame = gamesopgenre.get(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex <= gamesopgenre.size()) {
-            clearScreen();
-            System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
-        }
-        System.out.println();
-        System.out.println("Wilt u deze spel beoordelen? (J/N)");
-        scanner.nextLine();
-        String keuze = scanner.nextLine();
-
-        if (keuze.equalsIgnoreCase("J")) {
-            // hier functionaliteit om review te geven op een game.
-            review = new Review();
-
-            System.out.println("Geef uw beoordeling voor graphics (1-5): ");
-            int graphicsRating = scanner.nextInt();
-            review.setRatingGraphics(graphicsRating);
-
-            System.out.println("Geef uw beoordeling voor story (1-5): ");
-            int storyRating = scanner.nextInt();
-            review.setRatingStory(storyRating);
-
-            System.out.println("Geef uw beoordeling voor gameplay (1-5): ");
-            int gameplayRating = scanner.nextInt();
-            review.setRatingGameplay(gameplayRating);
-
-
-            review.writeReviewToFile(gekozenGame); // Write the review to a file
+            System.out.println("Welke game kiest u");
+            int gekozenGameIndex = scanner.nextInt() - 1;
+            Game gekozenGame = gamesopgenre.get(gekozenGameIndex);
+            if (gekozenGameIndex >= 0 && gekozenGameIndex <= gamesopgenre.size()) {
+                clearScreen();
+                System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
+            }
             System.out.println();
-            System.out.println("Bedankt voor uw review!");
-            terugNaarHoofdmenu();
-    }
+            System.out.println("Wilt u deze spel beoordelen? (J/N)");
+            scanner.nextLine();
+            String keuze = scanner.nextLine();
+
+            if (keuze.equalsIgnoreCase("J")) {
+                // hier functionaliteit om review te geven op een game.
+                review = new Review();
+
+                System.out.println("Geef uw beoordeling voor graphics (1-5): ");
+                int graphicsRating = scanner.nextInt();
+                review.setRatingGraphics(graphicsRating);
+
+                System.out.println("Geef uw beoordeling voor story (1-5): ");
+                int storyRating = scanner.nextInt();
+                review.setRatingStory(storyRating);
+
+                System.out.println("Geef uw beoordeling voor gameplay (1-5): ");
+                int gameplayRating = scanner.nextInt();
+                review.setRatingGameplay(gameplayRating);
+
+                review.writeReviewToFile(gekozenGame); // Write the review to a file
+                System.out.println();
+                System.out.println("Bedankt voor uw review!");
+                terugNaarHoofdmenu();
+            }
         }
-        
-}
+    }
 
     private static void vulEnqueteIn() {
         clearScreen();
@@ -481,23 +478,22 @@ public class MenuExample {
             System.out.println("0. Enquête afronden");
             System.out.println();
             System.out.println("Voer uw keuze in:");
-            int choice = scanner.nextInt();
-            scanner.nextLine();
+            String choice = scanner.nextLine();
 
             switch (choice) {
-                case 1:
+                case "1":
                     enquete.addQuestion(QuestionMaker.createOpenQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
                     break;
-                case 2:
+                case "2":
                     enquete.addQuestion(QuestionMaker.createMultiplechoiceQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
                     break;
-                case 3:
+                case "3":
                     enquete.addQuestion(QuestionMaker.createConditionalQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
                     break;
-                case 0:
+                case "0":
                     running = false;
                     break;
                 default:

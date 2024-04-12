@@ -89,7 +89,6 @@ public class Game {
     }
 
     public double calculateAverageRating() {
-
         double totalRating = 0.0;
         int numReviews = reviews.size();
 
@@ -112,10 +111,6 @@ public class Game {
         System.out.printf("Rating: %.1f\n", calculateAverageRating());
         System.out.println();
         System.out.println("genre: " + genre);
-    }
-
-    public double toonrating() {
-        return calculateAverageRating();
     }
 }
 
