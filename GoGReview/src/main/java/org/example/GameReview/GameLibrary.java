@@ -10,7 +10,7 @@ import java.io.*;
 
 public class GameLibrary {
 
-    private ArrayList<Game> gamelijst = readGames();;
+    private ArrayList<Game> gamelijst = readGames();
     private Review review = new Review();
 
     public GameLibrary() {
@@ -34,12 +34,12 @@ public class GameLibrary {
         
     }
     public ArrayList<Game> readGames() {
-        ArrayList<Game> games = new ArrayList<Game>();
+        ArrayList<Game> games = new ArrayList<>();
 
-        String fileName = "games.csv";
+        String fileName = "src/main/resources/games.csv";
 
         BufferedReader reader = null;
-        String line = "";
+        String line;
 
         try {
             reader = new BufferedReader(new FileReader(fileName));

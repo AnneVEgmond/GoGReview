@@ -28,25 +28,25 @@ public class QuestionMaker {
         while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");
             String input = scanner.nextLine();
-            if (input.equals("J")) {
+            if (input.equalsIgnoreCase("J")) {
                 System.out.println("Vul het derde antwoord in:");
                 question.addAnswer(scanner.nextLine());
                 boolean runningInner = true;
                 while (runningInner) {
                     System.out.println("Wilt u een vierde antwoord toevoegen? (J/N)");
                     input = scanner.nextLine();
-                    if (input.equals("J")) {
+                    if (input.equalsIgnoreCase("J")) {
                         System.out.println("Vul het vierde antwoord in:");
                         question.addAnswer(scanner.nextLine());
                         runningInner = false;
-                    } else if (input.equals("N")) {
+                    } else if (input.equalsIgnoreCase("N")) {
                         runningInner = false;
                     } else {
                         System.out.println("Ongeldige keuze. Probeer opnieuw.");
                     }
                 }
                 runningOuter = false;
-            } else if (input.equals("N")) {
+            } else if (input.equalsIgnoreCase("N")) {
                 runningOuter = false;
             } else {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -67,25 +67,25 @@ public class QuestionMaker {
         while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");
             String input = scanner.nextLine();
-            if (input.equals("J")) {
+            if (input.equalsIgnoreCase("J")) {
                 System.out.println("Vul het derde antwoord in:");
                 question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
                 boolean runningInner = true;
                 while (runningInner) {
                     System.out.println("Wilt u een vierde antwoord toevoegen? (J/N)");
                     input = scanner.nextLine();
-                    if (input.equals("J")) {
+                    if (input.equalsIgnoreCase("J")) {
                         System.out.println("Vul het vierde antwoord in:");
                         question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
                         runningInner = false;
-                    } else if (input.equals("N")) {
+                    } else if (input.equalsIgnoreCase("N")) {
                         runningInner = false;
                     } else {
                         System.out.println("Ongeldige keuze. Probeer opnieuw.");
                     }
                 }
                 runningOuter = false;
-            } else if (input.equals("N")) {
+            } else if (input.equalsIgnoreCase("N")) {
                 runningOuter = false;
             } else {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -100,7 +100,7 @@ public class QuestionMaker {
         while (runningOuter) {
             System.out.println("Wilt u bij dit antwoord doorvragen? (J/N)");
             String input = scanner.nextLine();
-            if (input.equals("J")) {
+            if (input.equalsIgnoreCase("J")) {
                 boolean runningInner = true;
                 while (runningInner) {
                     System.out.println("Wat voor vraag wilt u toevoegen?");
@@ -135,7 +135,7 @@ public class QuestionMaker {
                     }
                 }
                 runningOuter = false;
-            } else if (input.equals("N")) {
+            } else if (input.equalsIgnoreCase("N")) {
                 runningOuter = false;
             } else {
                 System.out.println("Ongeldige keuze. Probeer opnieuw.");

@@ -17,17 +17,54 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class MenuExample {
-    private final static GameLibrary games = new GameLibrary();
-    private final static String EnquetePath = "Enquetes";
+    //private final static GameLibrary games = new GameLibrary();
+    private final static String ResourcePath = "src/main/resources";
 
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
+    public MenuExample() {
+        // Initialize the resource folder
+        File directory = new File(ResourcePath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the review folder
+        directory = new File(ResourcePath + "/Reviews");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the quiz folder
+        directory = new File(ResourcePath + "/Enquetes");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the quiz answers folder
+        directory = new File(ResourcePath + "/EnquetesAnswers");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the games.csv file for reading and writing
+        directory = new File(ResourcePath + "/games.csv");
+        try {
+            if (!directory.exists()) {
+                directory.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void menuStart() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
+        GameLibrary games = new GameLibrary();
 
         while (running) {
             printMenu();
@@ -37,16 +74,16 @@ public class MenuExample {
 
             switch (choice) {
                 case 1:
-                    alleGamesBekijken();
+                    alleGamesBekijken(games);
                     break;
                 case 2:
-                    ranglijstGames();
+                    ranglijstGames(games);
                     break;
                 case 3:
-                    uitverkoop();
+                    uitverkoop(games);
                     break;
                 case 4:
-                    genresBekijken();
+                    genresBekijken(games);
                     break;
                 case 5:
                     vulEnqueteIn();
@@ -59,7 +96,7 @@ public class MenuExample {
                     System.out.println("Programma wordt afgesloten.");
                     break;
                 case 9:
-                    adminMenu();
+                    adminMenu(games);
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -92,7 +129,7 @@ public class MenuExample {
         System.out.println("8. Afsluiten");
     }
 
-    private static void alleGamesBekijken() {
+    private static void alleGamesBekijken(GameLibrary games) {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -144,7 +181,7 @@ public class MenuExample {
         } else if (keuze.equalsIgnoreCase("N")){ terugNaarHoofdmenu();}
     }
 
-    private static void ranglijstGames() {
+    private static void ranglijstGames(GameLibrary games) {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -192,7 +229,7 @@ public class MenuExample {
         }
     }
 
-    private static void uitverkoop() {
+    private static void uitverkoop(GameLibrary games) {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -242,7 +279,7 @@ public class MenuExample {
         }
     }
 
-    private static void genresBekijken() {
+    private static void genresBekijken(GameLibrary games) {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -304,10 +341,7 @@ public class MenuExample {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         ArrayList<Enquete> enquetes = new ArrayList<>();
-        File directory = new File(EnquetePath);
-        if(!directory.exists()) {
-            directory.mkdir();
-        }
+        File directory = new File(ResourcePath + "/Enquetes");
         File[] files = directory.listFiles();
         if(files != null) {
             for(File file : files) {
@@ -348,7 +382,7 @@ public class MenuExample {
         new GameFrame();
     }
 
-    private static void adminMenu() {
+    private static void adminMenu(GameLibrary games) {
         boolean running = true;
         while(running) {
             clearScreen();
@@ -361,10 +395,10 @@ public class MenuExample {
             System.out.println("9: Terug naar hoofdmenu");
 
             System.out.print("Voer uw keuze in: ");
-            int keuze = scanner.nextInt();
+            String keuze = scanner.nextLine();
 
             switch (keuze) {
-                case 1:
+                case "1":
                     Game game = new Game();
                     Scanner keyboard = new Scanner(System.in);
                     System.out.println("Welke game wilt u toevoegen?");
@@ -397,16 +431,14 @@ public class MenuExample {
                     }
                     games.voegGameToe(game);
                     break;
-                case 2:
-                    
+                case "2":
                     games.printGamelijst();
                     System.out.println("Welke game wilt u verwijderen?");
                     int gameIndex = scanner.nextInt();
 
                     games.verwijderGame(gameIndex);
                     break;
-                case 3:
-                    
+                case "3":
                     clearScreen();
                     System.out.println("U heeft gekozen voor alle reviews bekijken");
                     System.out.println("");
@@ -420,10 +452,10 @@ public class MenuExample {
                     System.out.println("Druk op enter om terug te gaan");
                     scanner.nextLine();
                     break;
-                case 4:
+                case "4":
                     maakEnquete(scanner);
                     break;
-                case 9:
+                case "9":
                     running = false;
                     break;
                 default:
@@ -474,11 +506,7 @@ public class MenuExample {
             }
         }
         try {
-            File directory = new File(EnquetePath);
-            if(!directory.exists()) {
-                directory.mkdir();
-            }
-            FileOutputStream fout = new FileOutputStream(EnquetePath + "/" + name + ".ser");
+            FileOutputStream fout = new FileOutputStream(ResourcePath + "/Enquetes/" + name + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(enquete);
         } catch (IOException e) {

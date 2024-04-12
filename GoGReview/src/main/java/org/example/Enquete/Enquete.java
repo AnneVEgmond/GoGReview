@@ -35,7 +35,7 @@ public class Enquete implements Serializable {
         }
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH-mm-ss_dd-MM-yyyy");
         LocalDateTime now = LocalDateTime.now();
-        try (CSVWriter writer = new CSVWriter(new FileWriter("EnqueteAnswers/" + name + "_" + dtf.format(now) + ".csv"))) {
+        try (CSVWriter writer = new CSVWriter(new FileWriter("src/main/resources/EnqueteAnswers/" + name + "_" + dtf.format(now) + ".csv"))) {
             for (Question q : this.questions) {
                 q.answerQuestion(scanner, writer);
             }
