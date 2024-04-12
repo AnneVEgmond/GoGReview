@@ -6,21 +6,21 @@ import java.util.Random;
 
 public class GamePanel extends JPanel implements ActionListener{
 
-	static final int SCREEN_WIDTH = 750;
-	static final int SCREEN_HEIGHT = 750;
-	static final int UNIT_SIZE = 50;
-	static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
-	static final int DELAY = 150;
-	final int x[] = new int[GAME_UNITS];
-	final int y[] = new int[GAME_UNITS];
-	int bodyParts = 6;
-	int applesEaten;
-	int appleX;
-	int appleY;
-	char direction = 'R';
-	boolean running = false;
-	Timer timer;
-	Random random;
+	private static final int SCREEN_WIDTH = 750;
+	private static final int SCREEN_HEIGHT = 750;
+	private static final int UNIT_SIZE = 50;
+	private static final int GAME_UNITS = (SCREEN_WIDTH*SCREEN_HEIGHT)/(UNIT_SIZE*UNIT_SIZE);
+	private static final int DELAY = 150;
+	private final int x[] = new int[GAME_UNITS];
+	private final int y[] = new int[GAME_UNITS];
+	private int bodyParts = 6;
+	private int applesEaten;
+	private int appleX;
+	private int appleY;
+	private char direction = 'R';
+	private boolean running = false;
+	private Timer timer;
+	private Random random;
 	
 	GamePanel(){
 		random = new Random();

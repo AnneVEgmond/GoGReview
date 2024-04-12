@@ -1,68 +1,63 @@
 package org.example;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.io.*;
 
 public class MenuExample {
-    static GameLibrary games = new GameLibrary();
+    private final static GameLibrary games = new GameLibrary();
     private final static String EnquetePath = "Enquetes";
+
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
-
 
     public void menuStart() {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
         while (running) {
-            
-            
             printMenu();
             System.out.print("Voer uw keuze in: ");
-            
             int choice = scanner.nextInt();
-            System.out.println("");
-            
+            System.out.println();
 
             switch (choice) {
                 case 1:
-                    optie1();
+                    alleGamesBekijken();
                     break;
                 case 2:
-                    optie2();
+                    ranglijstGames();
                     break;
                 case 3:
-                    optie3();
+                    uitverkoop();
                     break;
                 case 4:
-                    optie4();
+                    genresBekijken();
                     break;
-
                 case 5:
-                optie5();
-                    
+                    vulEnqueteIn();
                     break;
                 case 6:
-                optie6();
-                break;
+                    retroGameSpelen();
+                    break;
                 case 8:
-                running = false;
+                    running = false;
                     System.out.println("Programma wordt afgesloten.");
                     break;
                 case 9:
-                optie9();
+                    adminMenu();
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
             }
         }
-        
-
-        
     }
 
     private void printMenu() {
@@ -81,17 +76,16 @@ public class MenuExample {
                 "       / ,-'        \\/|||`|'|'|'|\\/        `-, \\\n" +
                 "      /,'             | | | | | | |             `\\");
         System.out.println("MENU:");
-
         System.out.println("1. Alle games bekijken");
         System.out.println("2. Ranglijst games");
-        System.out.println("3. uitverkoop");
-        System.out.println("4. genres bekijken");
+        System.out.println("3. Uitverkoop");
+        System.out.println("4. Genres bekijken");
         System.out.println("5. Maak enquête");
         System.out.println("6. Retro game spelen");
         System.out.println("8. Afsluiten");
     }
 
-    private static void optie1() {
+    private static void alleGamesBekijken() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -104,18 +98,16 @@ public class MenuExample {
         
         int gekozenGameIndex = scanner.nextInt()-1;
             
-            Game gekozenGame = games.getGame(gekozenGameIndex);
-            if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+        Game gekozenGame = games.getGame(gekozenGameIndex);
+        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
 
             clearScreen();
             review.readFile(gekozenGame);
             System.out.println("U heeft gekozen voor het volgende spel: " + gekozenGame.getNaam());
 
             gekozenGame.toonGegevens();
-            }
-            
-      
-            
+        }
+
         System.out.println();
         System.out.println("Wilt u deze spel beoordelen? (J/N)");
         scanner.nextLine();
@@ -138,21 +130,14 @@ public class MenuExample {
             int gameplayRating = scanner.nextInt();
             review.setRatingGameplay(gameplayRating);
 
-
-
             review.writeReviewToFile(gekozenGame); // Write the review to a file
             System.out.println();
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
-
-
         } else if (keuze.equalsIgnoreCase("N")){ terugNaarHoofdmenu();}
-        
-
-
     }
 
-    private static void optie2() {
+    private static void ranglijstGames() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -179,8 +164,6 @@ public class MenuExample {
 
         if (keuze.equalsIgnoreCase("J")) {
             // hier functionaliteit om review te geven op een game.
-            review = new Review();
-
             System.out.println("Geef uw beoordeling voor graphics (1-5): ");
             int graphicsRating = scanner.nextInt();
             review.setRatingGraphics(graphicsRating);
@@ -193,26 +176,14 @@ public class MenuExample {
             int gameplayRating = scanner.nextInt();
             review.setRatingGameplay(gameplayRating);
 
-
-            
             review.writeReviewToFile(gekozenGame); // Write the review to a file
             System.out.println();
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
-            
-
-        } 
-
+        }
     }
 
-     
-
-    
-
-
-
-
-    private static void optie3() {
+    private static void uitverkoop() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
@@ -259,24 +230,17 @@ public class MenuExample {
             System.out.println();
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
-            
         }
-        
-
-
     }
-         
-         
-         
-    private static void optie4() {
+
+    private static void genresBekijken() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor genres bekijken");
         System.out.println("Welke genre wilt u bekijken?");
         String genre = scanner.nextLine();
-        
-    
+
         ArrayList<Game> gamesopgenre = games.printGamesByGenre(genre);
         int size = gamesopgenre.size();
         if (size == 0) {
@@ -322,153 +286,135 @@ public class MenuExample {
             System.out.println();
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
-
-
     }
 }
 
-        
-    
-
-    
-
-    private static void optie5() {
+    private static void vulEnqueteIn() {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
-            
-            
-            ArrayList<Enquete> enquetes = new ArrayList<>();
-            File directory = new File(EnquetePath);
-            if(!directory.exists()) {
-                directory.mkdir();
-            }
-            File[] files = directory.listFiles();
-            if(files != null) {
-                for(File file : files) {
-                    try {
-                        FileInputStream fin = new FileInputStream(file);
-                        ObjectInputStream in = new ObjectInputStream(fin);
-                        Enquete enquete = (Enquete) in.readObject();
-                        enquetes.add(enquete);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
+        ArrayList<Enquete> enquetes = new ArrayList<>();
+        File directory = new File(EnquetePath);
+        if(!directory.exists()) {
+            directory.mkdir();
+        }
+        File[] files = directory.listFiles();
+        if(files != null) {
+            for(File file : files) {
+                try {
+                    FileInputStream fin = new FileInputStream(file);
+                    ObjectInputStream in = new ObjectInputStream(fin);
+                    Enquete enquete = (Enquete) in.readObject();
+                    enquetes.add(enquete);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    throw new RuntimeException(e);
                 }
-            }
-            if(enquetes.isEmpty()) {
-                System.out.println("Er zijn op het moment geen enquêtes beschikbaar.");
-            } else {
-                System.out.println("Beschikbare enquêtes:");
-                for (int i = 0; i < enquetes.size(); i++) {
-                    System.out.println((i+1) + ". " + enquetes.get(i).getName());
-                }
-                boolean running = true;
-                int choice = -1;
-                while(running) {
-                    System.out.println("Voer uw keuze in:");
-                    choice = scanner.nextInt();
-                    scanner.nextLine();
-                    if(choice <= enquetes.size() && choice >= 0) {
-                        running = false;
-                    }
-                }
-                
-                enquetes.get(choice - 1).takeQuiz(scanner);
             }
         }
-    
-
-        private static void optie6() {
-            SnakeGame game = new SnakeGame();
-            game.StartGame();
+        if(enquetes.isEmpty()) {
+            System.out.println("Er zijn op het moment geen enquêtes beschikbaar.");
+        } else {
+            System.out.println("Beschikbare enquêtes:");
+            for (int i = 0; i < enquetes.size(); i++) {
+                System.out.println((i+1) + ". " + enquetes.get(i).getName());
+            }
+            boolean running = true;
+            int choice = -1;
+            while(running) {
+                System.out.println("Voer uw keuze in:");
+                choice = scanner.nextInt();
+                scanner.nextLine();
+                if(choice <= enquetes.size() && choice >= 0) {
+                    running = false;
+                }
+            }
+            enquetes.get(choice - 1).takeQuiz(scanner);
         }
-    
+    }
 
-    
+    private static void retroGameSpelen() {
+        SnakeGame game = new SnakeGame();
+        game.StartGame();
+    }
 
-    private static void optie9() {
-        clearScreen();
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("U heeft gekozen voor admin");
-        System.out.println("1: Voeg game toe");
-        System.out.println("2: Verwijder game");
-        System.out.println("3: Bekijk reviews");
-        System.out.println("4: maak enquête");
-        System.out.println("9: Terug naar hoofdmenu");
-
-        System.out.print("Voer uw keuze in: ");
-        int keuze = scanner.nextInt();
-        
-
-        switch (keuze) {
-            case 1:
-            Game game = new Game();
-            Scanner keyboard = new Scanner(System.in);
-            System.out.println ("Welke game wilt u toevoegen?");
-            String naam = keyboard.nextLine();
-            game.setNaam(naam);
-
-            System.out.println ("Wat is het releaseJaar?");
-            int jaarRelease = keyboard.nextInt();
-            game.setJaarRelease(jaarRelease);
-
-            keyboard.nextLine();
-
-            System.out.println ("Wat is het genre?");
-            String genre = keyboard.nextLine();
-            game.setGenre(genre);
-
-            System.out.println ("Wat is de prijs?");
-            double prijs = keyboard.nextDouble();
-            game.setPrijs(prijs);
-
-            System.out.println("Is deze game in de sale? J/N?");
-
-            String korting = scanner.nextLine();
-
-            if (korting.equalsIgnoreCase("j")) {
-                game.setSale(true);
-            } else { game.setSale(false); }
-        
-            games.voegGameToe(game);
-            
-        
-
-                break;
-            case 2:
-                games.printGamelijst();
-                System.out.println("Welke game wilt u verwijderen?");
-                int gameIndex = scanner.nextInt();
-                
-                games.verwijderGame(gameIndex);
-                break;
-            case 3:
+    private static void adminMenu() {
+        boolean running = true;
+        while(running) {
             clearScreen();
-                
-               ArrayList <Game> gamess = games.getGamelijst();
-                for (Game gamen : gamess) {
-                    System.out.printf(gamen.getNaam() + ": %.1f" + " $" + gamen.getPrijs() + "\n", gamen.calculateAverageRating());    
-                }
-                
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("U heeft gekozen voor admin");
+            System.out.println("1: Voeg game toe");
+            System.out.println("2: Verwijder game");
+            System.out.println("3: Bekijk reviews");
+            System.out.println("4: Maak enquête");
+            System.out.println("9: Terug naar hoofdmenu");
 
-                break;
+            System.out.print("Voer uw keuze in: ");
+            int keuze = scanner.nextInt();
 
-            case 4:
-            optieenquete(scanner);
-            
-            case 9:
-             
-                break;
-            default:
-                System.out.println("Ongeldige keuze. Probeer opnieuw.");
+            switch (keuze) {
+                case 1:
+                    Game game = new Game();
+                    Scanner keyboard = new Scanner(System.in);
+                    System.out.println("Welke game wilt u toevoegen?");
+                    String naam = keyboard.nextLine();
+                    game.setNaam(naam);
+
+                    System.out.println("Wat is het releaseJaar?");
+                    int jaarRelease = keyboard.nextInt();
+                    game.setJaarRelease(jaarRelease);
+
+                    keyboard.nextLine();
+
+                    System.out.println("Wat is het genre?");
+                    String genre = keyboard.nextLine();
+                    game.setGenre(genre);
+
+                    System.out.println("Wat is de prijs?");
+                    double prijs = keyboard.nextDouble();
+                    game.setPrijs(prijs);
+
+                    System.out.println("Is deze game in de sale? J/N?");
+
+                    String korting = scanner.nextLine();
+
+                    if (korting.equalsIgnoreCase("j")) {
+                        game.setSale(true);
+                    } else {
+                        game.setSale(false);
+                    }
+                    games.voegGameToe(game);
+                    break;
+                case 2:
+                    games.printGamelijst();
+                    System.out.println("Welke game wilt u verwijderen?");
+                    int gameIndex = scanner.nextInt();
+
+                    games.verwijderGame(gameIndex);
+                    break;
+                case 3:
+                    clearScreen();
+
+                    ArrayList<Game> gamess = games.getGamelijst();
+                    for (Game gamen : gamess) {
+                        System.out.printf(gamen.getNaam() + ": %.1f" + " $" + gamen.getPrijs() + "\n", gamen.calculateAverageRating());
+                    }
+                    break;
+                case 4:
+                    maakEnquete(scanner);
+                    break;
+                case 9:
+                    running = false;
+                    break;
+                default:
+                    System.out.println("Ongeldige keuze. Probeer opnieuw.");
+            }
         }
         terugNaarHoofdmenu();
-
     }
     
-    private static void optieenquete(Scanner scanner) {
+    private static void maakEnquete(Scanner scanner) {
         clearScreen();
         boolean running = true;
         System.out.println("Geef een naam aan de enquête: ");
@@ -491,21 +437,17 @@ public class MenuExample {
                 case 1:
                     enquete.addQuestion(QuestionMaker.createOpenQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
-                    
                     break;
                 case 2:
                     enquete.addQuestion(QuestionMaker.createMultiplechoiceQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
-                    
                     break;
                 case 3:
                     enquete.addQuestion(QuestionMaker.createConditionalQuestion(scanner));
                     System.out.println("Vraag is toegevoegd!");
-                    
                     break;
                 case 0:
                     running = false;
-                    
                     break;
                 default:
                     System.out.println("Ongeldige keuze. Probeer opnieuw.");
@@ -525,19 +467,9 @@ public class MenuExample {
         }
     }
 
-
-
     private static void terugNaarHoofdmenu() {
-
         Scanner scanner = new Scanner(System.in);
         System.out.println("Druk op Enter om terug te gaan naar het hoofdmenu.");
-        scanner.nextLine();
-        clearScreen();
-        
-    }
-
-    private static void terugNaarHoofdmenu2() {
-        Scanner scanner = new Scanner(System.in);
         scanner.nextLine();
         clearScreen();
     }
