@@ -388,6 +388,7 @@ public class MenuExample {
                     games.voegGameToe(game);
                     break;
                 case 2:
+                    
                     games.printGamelijst();
                     System.out.println("Welke game wilt u verwijderen?");
                     int gameIndex = scanner.nextInt();
@@ -395,11 +396,14 @@ public class MenuExample {
                     games.verwijderGame(gameIndex);
                     break;
                 case 3:
+                    
                     clearScreen();
-
+                    System.out.println("U heeft gekozen voor alle reviews bekijken");
+                    scanner.nextLine();
                     ArrayList<Game> gamess = games.getGamelijst();
                     for (Game gamen : gamess) {
-                        System.out.printf(gamen.getNaam() + ": %.1f" + " $" + gamen.getPrijs() + "\n", gamen.calculateAverageRating());
+                        System.out.printf("%s: %.1f $%.2f\n", gamen.getNaam(), gamen.calculateAverageRating(), gamen.getPrijs());
+
                     }
                     break;
                 case 4:
