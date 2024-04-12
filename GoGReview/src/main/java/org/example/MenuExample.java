@@ -205,7 +205,7 @@ public class MenuExample {
             System.out.printf(i +" " + game.getNaam() + " " + game.getJaarRelease() + " genre: " + game.getGenre() + " $"  + game.getPrijs() +" %.1f\n", game.calculateAverageRating());
             i++;
         }
-
+        System.out.println("Kies een game uit");
         int gekozenGameIndex = scanner.nextInt() - 1;
         Game gekozenGame = gamesmetkorting.get(gekozenGameIndex);
         if (gekozenGameIndex >= 0 && gekozenGameIndex <= gamesmetkorting.size()) {
@@ -254,14 +254,14 @@ public class MenuExample {
         int size = gamesopgenre.size();
         if (size == 0) {
             System.out.println("Er bestaan geen games van dit genre");
+            terugNaarHoofdmenu();
         } else {
             int i = 1;
             for (Game game : gamesopgenre) {
                 System.out.printf(i +" %s, %.1f, $%.2f\n", game.getNaam(), game.calculateAverageRating(), game.getPrijs());
                 i++;
             }
-        }
-        System.out.println("");
+            System.out.println("");
         System.out.println("Welke game kiest u");
         int gekozenGameIndex = scanner.nextInt() - 1;
         Game gekozenGame = gamesopgenre.get(gekozenGameIndex);
@@ -296,6 +296,8 @@ public class MenuExample {
             System.out.println("Bedankt voor uw review!");
             terugNaarHoofdmenu();
     }
+        }
+        
 }
 
     private static void vulEnqueteIn() {
@@ -407,12 +409,16 @@ public class MenuExample {
                     
                     clearScreen();
                     System.out.println("U heeft gekozen voor alle reviews bekijken");
+                    System.out.println("");
                     scanner.nextLine();
                     ArrayList<Game> gamess = games.getGamelijst();
                     for (Game gamen : gamess) {
                         System.out.printf("%s: %.1f $%.2f\n", gamen.getNaam(), gamen.calculateAverageRating(), gamen.getPrijs());
 
                     }
+                    System.out.println("");
+                    System.out.println("Druk op enter om terug te gaan");
+                    scanner.nextLine();
                     break;
                 case 4:
                     maakEnquete(scanner);
