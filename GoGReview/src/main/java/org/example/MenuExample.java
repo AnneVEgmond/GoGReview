@@ -1,5 +1,12 @@
 package org.example;
 
+import org.example.Enquete.Enquete;
+import org.example.Enquete.QuestionMaker;
+import org.example.GameReview.Game;
+import org.example.GameReview.GameLibrary;
+import org.example.GameReview.Review;
+import org.example.SnakeGame.GameFrame;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -99,7 +106,7 @@ public class MenuExample {
         int gekozenGameIndex = scanner.nextInt()-1;
             
         Game gekozenGame = games.getGame(gekozenGameIndex);
-        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.gamelijst.size()) {
+        if (gekozenGameIndex >= 0 && gekozenGameIndex < games.getGamelijst().size()) {
 
             clearScreen();
             review.readFile(gekozenGame);
@@ -144,8 +151,10 @@ public class MenuExample {
         System.out.println("U heeft gekozen voor ranglijst games.");
         System.out.println();
         ArrayList <Game> gamesoprating = games.printGamesByRating();
+        int i = 1;
         for (Game game : gamesoprating) {
-            System.out.printf(game.getNaam() + "  %.1f  $"  + game.getPrijs() + "\n", game.getRating());
+            System.out.printf(i + ". " + game.getNaam() + "  %.1f  $"  + game.getPrijs() + "\n", game.getRating());
+            i++;
         }
         System.out.println();
         System.out.println("Kies een game uit: ");
@@ -334,8 +343,7 @@ public class MenuExample {
     }
 
     private static void retroGameSpelen() {
-        SnakeGame game = new SnakeGame();
-        game.StartGame();
+        new GameFrame();
     }
 
     private static void adminMenu() {

@@ -1,25 +1,22 @@
-package org.example;
+package org.example.GameReview;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Scanner;
-import com.opencsv.CSVParserWriter;
+
 import com.opencsv.CSVWriter;
 
 import java.io.*;
 
 public class GameLibrary {
 
-    ArrayList<Game> gamelijst = readGames();;
-    Review review = new Review();
+    private ArrayList<Game> gamelijst = readGames();;
+    private Review review = new Review();
 
     public GameLibrary() {
         for (Game game : gamelijst) {
             review.readFile(game);
         }
-    
-    
     }
 
     public void writeGametofile(Game game) {
@@ -39,9 +36,7 @@ public class GameLibrary {
     public ArrayList<Game> readGames() {
         ArrayList<Game> games = new ArrayList<Game>();
 
-
         String fileName = "games.csv";
-
 
         BufferedReader reader = null;
         String line = "";
@@ -60,9 +55,6 @@ public class GameLibrary {
                     
                     Game game = new Game(naam, prijs, jaarrelease , genre, sale);
                     games.add(game);
-
-
-
                 } else {
                     System.err.println("Invalid data format in CSV file: " + fileName);
                 }
@@ -92,10 +84,6 @@ public class GameLibrary {
         }
         return gamesmetkorting;
     }
-
-
-
-    
 
     public ArrayList<Game> printGamesByGenre(String genre) {
         
@@ -134,13 +122,10 @@ public class GameLibrary {
 
     }
 
-
     public ArrayList<Game> getGamelijst() {
         return gamelijst;
     }
 
-
-    
     public void voegGameToe(Game game) {
         gamelijst.add(game);
         writeGametofile(game);

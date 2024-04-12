@@ -1,4 +1,4 @@
-package org.example;
+package org.example.GameReview;
 
 import com.opencsv.CSVWriter;
 

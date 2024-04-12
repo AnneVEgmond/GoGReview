@@ -1,4 +1,4 @@
-import org.example.Review;
+import org.example.GameReview.Review;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
