@@ -46,6 +46,9 @@ public class MenuExample {
                 optie5();
                     
                     break;
+                case 6:
+                optie6();
+                break;
                 case 8:
                 running = false;
                     System.out.println("Programma wordt afgesloten.");
@@ -376,6 +379,11 @@ public class MenuExample {
             }
         }
     
+
+        private static void optie6() {
+            SnakeGame game = new SnakeGame();
+            game.StartGame();
+        }
     
 
     
