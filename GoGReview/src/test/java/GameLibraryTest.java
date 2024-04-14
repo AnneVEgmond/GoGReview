@@ -5,16 +5,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.ArrayList;
 
 public class GameLibraryTest {
-
+// Deze test kijkt of een game lijst die wordt gesorteerd niet null is en hiermee weten we dat er een lijst is met games
     @Test
     void testPrintGamesByRating() {
-        // Arrange: Create a game library instance
+        
         GameLibrary gameLibrary = new GameLibrary();
         
-        // Act: Call the method under test
+        
         ArrayList<Game> sortedGames = gameLibrary.printGamesByRating();
         
-        // Assert: Verify that the returned list is not null
+    
         assertTrue(sortedGames != null);
     }
 }

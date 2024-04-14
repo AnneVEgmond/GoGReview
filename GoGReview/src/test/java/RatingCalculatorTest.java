@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 
 public class RatingCalculatorTest {
-
+// hier wordt getest of een game die geen ratings heeft echt een score van 0 nog heeft
     @Test
     void testCalculateAverageRating_NoReviews() {
-        // Arrange: Create a game instance with an empty list of reviews
+        
         Game game = new Game("Sample Game", 2022, "Action");
 
-        // Act: Call the method under test
+        
         double averageRating = game.calculateAverageRating();
 
-        // Assert: Verify the result is 0.0 when there are no reviews
+       
         assertEquals(0.0, averageRating);
     }
-
+// hier wordt getest of een game een juiste gemiddelde rating krijgt op basis van 2 reviews die allebei op 3 criteria gerievewd worden
     @Test
     void testCalculateAverageRating_WithReviews() {
         // Arrange: Create a game instance with a list of reviews
