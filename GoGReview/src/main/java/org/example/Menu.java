@@ -19,6 +19,8 @@ import java.util.ArrayList;
 public class Menu {
     public final static String ResourcePath = "src/main/resources";
 
+    private static final Scanner scanner = new Scanner(System.in);
+
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
@@ -61,7 +63,6 @@ public class Menu {
     }
 
     public void menuStart() {
-        Scanner scanner = new Scanner(System.in);
         boolean running = true;
         GameLibrary games = new GameLibrary();
 
@@ -130,7 +131,6 @@ public class Menu {
 
     private static void alleGamesBekijken(GameLibrary games) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor alle games bekijken.");
 
@@ -190,7 +190,6 @@ public class Menu {
 
     private static void ranglijstGames(GameLibrary games) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor ranglijst games.");
         System.out.println();
@@ -243,7 +242,6 @@ public class Menu {
 
     private static void uitverkoop(GameLibrary games) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         Review review;
         System.out.println("U heeft gekozen voor uitverkoop.");
          
@@ -298,7 +296,6 @@ public class Menu {
 
     private static void genresBekijken(GameLibrary games) {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         Review review = new Review();
         System.out.println("U heeft gekozen voor genres bekijken");
         if(games.getGamelijst().isEmpty()) {
@@ -359,7 +356,6 @@ public class Menu {
 
     private static void vulEnqueteIn() {
         clearScreen();
-        Scanner scanner = new Scanner(System.in);
         ArrayList<Enquete> enquetes = new ArrayList<>();
         File directory = new File(ResourcePath + "/Enquetes");
         File[] files = directory.listFiles();
@@ -407,7 +403,6 @@ public class Menu {
         boolean running = true;
         while(running) {
             clearScreen();
-            Scanner scanner = new Scanner(System.in);
             System.out.println("U heeft gekozen voor admin");
             System.out.println("1: Voeg game toe");
             System.out.println("2: Verwijder game");
@@ -473,7 +468,7 @@ public class Menu {
                     scanner.nextLine();
                     break;
                 case "4":
-                    maakEnquete(scanner);
+                    maakEnquete();
                     break;
                 case "9":
                     running = false;
@@ -485,7 +480,7 @@ public class Menu {
         terugNaarHoofdmenu();
     }
     
-    private static void maakEnquete(Scanner scanner) {
+    private static void maakEnquete() {
         clearScreen();
         boolean running = true;
         System.out.println("Geef een naam aan de enquête: ");
