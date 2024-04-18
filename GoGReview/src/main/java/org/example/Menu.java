@@ -15,11 +15,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Scanner;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class Menu {
-    
+    private final static String ResourcePath = "src/main/resources";
 
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
@@ -27,8 +25,39 @@ public class Menu {
     }
 
     public Menu() {
-        
-     
+        // Initialize the resource folder
+        File directory = new File(ResourcePath);
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the review folder
+        directory = new File(ResourcePath + "/Reviews");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the quiz folder
+        directory = new File(ResourcePath + "/Enquetes");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the quiz answers folder
+        directory = new File(ResourcePath + "/EnqueteAnswers");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+
+        // Initialize the games.csv file for reading and writing
+        directory = new File(ResourcePath + "/games.csv");
+        try {
+            if (!directory.exists()) {
+                directory.createNewFile();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void menuStart() {
@@ -94,7 +123,7 @@ public class Menu {
         System.out.println("2. Ranglijst games");
         System.out.println("3. Uitverkoop");
         System.out.println("4. Genres bekijken");
-        System.out.println("5. Vul enquête in");
+        System.out.println("5. Maak enquête");
         System.out.println("6. Retro game spelen");
         System.out.println("8. Afsluiten");
     }
@@ -173,7 +202,6 @@ public class Menu {
         }
         int i = 1;
         for (Game game : gamesoprating) {
-            review.readFile(game);
             System.out.printf(i + ". " + game.getNaam() + "  %.1f  $"  + game.getPrijs() + "\n", game.getRating());
             i++;
         }
@@ -333,7 +361,7 @@ public class Menu {
         clearScreen();
         Scanner scanner = new Scanner(System.in);
         ArrayList<Enquete> enquetes = new ArrayList<>();
-        File directory = new File("Enquetes");
+        File directory = new File(ResourcePath + "/Enquetes");
         File[] files = directory.listFiles();
         if(files != null) {
             for(File file : files) {
@@ -411,7 +439,7 @@ public class Menu {
                     System.out.println("Wat is de prijs?");
                     double prijs = keyboard.nextDouble();
                     game.setPrijs(prijs);
-                    
+                    scanner.nextLine();
 
                     System.out.println("Is deze game in de sale? J/N?");
 
@@ -435,11 +463,9 @@ public class Menu {
                     clearScreen();
                     System.out.println("U heeft gekozen voor alle reviews bekijken");
                     System.out.println("");
-                    
+                    scanner.nextLine();
                     ArrayList<Game> gamess = games.getGamelijst();
-                    Collections.sort(gamess, Comparator.comparingDouble(Game::calculateAverageRating).reversed());
                     for (Game gamen : gamess) {
-                        
                         System.out.printf("%s: %.1f $%.2f\n", gamen.getNaam(), gamen.calculateAverageRating(), gamen.getPrijs());
 
                     }
@@ -500,7 +526,7 @@ public class Menu {
             }
         }
         try {
-            FileOutputStream fout = new FileOutputStream("/Enquetes/" + name + ".ser");
+            FileOutputStream fout = new FileOutputStream(ResourcePath + "/Enquetes/" + name + ".ser");
             ObjectOutputStream oos = new ObjectOutputStream(fout);
             oos.writeObject(enquete);
         } catch (IOException e) {
