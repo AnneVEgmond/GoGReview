@@ -1,8 +1,7 @@
 package org.example.GameReview;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+
 
 import com.opencsv.CSVWriter;
 
@@ -36,7 +35,7 @@ public class GameLibrary {
     public ArrayList<Game> readGames() {
         ArrayList<Game> games = new ArrayList<>();
 
-        String fileName = "src/main/resources/games.csv";
+        String fileName = "games.csv";
 
         BufferedReader reader = null;
         String line;
