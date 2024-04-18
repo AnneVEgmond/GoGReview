@@ -296,7 +296,7 @@ public class Menu {
 
     private static void genresBekijken(GameLibrary games) {
         clearScreen();
-        Review review = new Review();
+        Review review;
         System.out.println("U heeft gekozen voor genres bekijken");
         if(games.getGamelijst().isEmpty()) {
             System.out.println("Er zijn op het moment geen games in het assortiment");

@@ -24,6 +24,7 @@ public class QuestionMaker {
         question.addAnswer(scanner.nextLine());
         System.out.println("Vul tweede antwoord in:");
         question.addAnswer(scanner.nextLine());
+
         boolean runningOuter = true;
         while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");
@@ -63,6 +64,7 @@ public class QuestionMaker {
         question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
         System.out.println("Vul tweede antwoord in:");
         question.addAnswer(scanner.nextLine(), follupQuestion(scanner));
+
         boolean runningOuter = true;
         while (runningOuter) {
             System.out.println("Wilt u een derde antwoord toevoegen? (J/N)");

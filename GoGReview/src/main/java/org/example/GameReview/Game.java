@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Game {
 
-    // variables
     private String naam;
     private int jaarRelease;
     private String genre;
@@ -13,7 +12,6 @@ public class Game {
     private double prijs;
     private ArrayList<Review> reviews;
 
-    //constructors
     public Game(String naam, Double prijs, int jaarRelease, String genre, boolean sale) {
         this.naam = naam;
         this.jaarRelease = jaarRelease;

@@ -20,9 +20,9 @@ public class Review {
         this.ratingGameplay = ratingGameplay;
 
     }
+
     public Review() { }
 
-    // Getter and setters
     public int getRatingGraphics() {
         return ratingGraphics;
     }
@@ -67,7 +67,6 @@ public class Review {
             System.err.println("Er is iets missgegaan " + e.getMessage());
         }
     }
-
 
     public void readFile(Game gekozenGame) {
         String fileName = ResourcePath + "/Reviews/" + gekozenGame.getNaam() + "_reviews.csv";

@@ -43,5 +43,4 @@ public class Enquete implements Serializable {
             e.printStackTrace();
         }
     }
-
 }

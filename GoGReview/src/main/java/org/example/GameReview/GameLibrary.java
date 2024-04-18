@@ -31,7 +31,6 @@ public class GameLibrary {
         }
         catch (IOException e) {
             System.err.println("Er is iets missgegaan " + e.getMessage());
-
         }
     }
 
@@ -75,7 +74,6 @@ public class GameLibrary {
         }
         return games;
     }
-
 
     public ArrayList<Game> printgamesmetkorting() {
         ArrayList<Game> gamesmetkorting = new ArrayList<>();
