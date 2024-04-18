@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import static org.example.Menu.ResourcePath;
+
 public class Review {
     private int ratingGraphics;
     private int ratingStory;
@@ -51,7 +53,7 @@ public class Review {
      * @param gekozenGame Specificeerd voor welke game de review is
      */
     public void writeReviewToFile(Game gekozenGame) {
-        String fileName = gekozenGame.getNaam() + "_reviews.csv";
+        String fileName = ResourcePath + "/Reviews/" + gekozenGame.getNaam() + "_reviews.csv";
         try (CSVWriter writer = new CSVWriter(new FileWriter(fileName, true))) {
             String[] data = {
                     String.valueOf(ratingGraphics),
@@ -68,7 +70,7 @@ public class Review {
 
 
     public void readFile(Game gekozenGame) {
-        String fileName = gekozenGame.getNaam() + "_reviews.csv";
+        String fileName = ResourcePath + "/Reviews/" + gekozenGame.getNaam() + "_reviews.csv";
         BufferedReader reader = null;
         String line = "";
         try {

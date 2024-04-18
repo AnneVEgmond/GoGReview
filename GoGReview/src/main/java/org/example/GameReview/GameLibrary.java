@@ -8,6 +8,8 @@ import com.opencsv.CSVWriter;
 
 import java.io.*;
 
+import static org.example.Menu.ResourcePath;
+
 public class GameLibrary {
 
     private ArrayList<Game> gamelijst = readGames();
@@ -20,7 +22,7 @@ public class GameLibrary {
     }
 
     public void writeGametofile(Game game) {
-        String filename = "games.csv";
+        String filename = ResourcePath + "/games.csv";
         try (CSVWriter writer = new CSVWriter(new FileWriter(filename, true))) {
             String [] data = {String.valueOf(game.getNaam()), String.valueOf(game.getJaarRelease()), String.valueOf(game.getGenre()), String.valueOf(game.getPrijs()), String.valueOf(game.getSale()) };
             writer.writeNext(data);

@@ -17,7 +17,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class Menu {
-    private final static String ResourcePath = "src/main/resources";
+    public final static String ResourcePath = "src/main/resources";
 
     private static void clearScreen() {
         System.out.print("\033[H\033[2J");
