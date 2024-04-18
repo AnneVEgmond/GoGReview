@@ -33,8 +33,8 @@ public class GameLibrary {
             System.err.println("Er is iets missgegaan " + e.getMessage());
 
         }
-        
     }
+
     public ArrayList<Game> readGames() {
         ArrayList<Game> games = new ArrayList<>();
 
@@ -94,7 +94,6 @@ public class GameLibrary {
         for (Game game : gamelijst) {
             if (game.getGenre().equalsIgnoreCase(genre)) {
                 gamesopgenre.add(game);
-                
             }
         }
         return gamesopgenre;
@@ -119,7 +118,6 @@ public class GameLibrary {
             games.add(game);
         }
         return games;
-
     }
 
     public ArrayList<Game> getGamelijst() {
@@ -129,15 +127,12 @@ public class GameLibrary {
     public void voegGameToe(Game game) {
         gamelijst.add(game);
         writeGametofile(game);
-
     }
-
-
 
     public void verwijderGame(int gameIndex) {
         gamelijst.remove(gameIndex - 1);
         String temp = "temp.csv";
-        String filepath = "games.csv";
+        String filepath = ResourcePath + "/games.csv";
         File oldfile = new File(filepath);
         File newfile = new File(temp);
     
@@ -179,5 +174,4 @@ public class GameLibrary {
             System.out.println(e);
         }
     }
-    
 }
