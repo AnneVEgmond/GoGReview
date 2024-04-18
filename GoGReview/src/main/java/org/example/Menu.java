@@ -421,23 +421,22 @@ public class Menu {
             switch (keuze) {
                 case "1":
                     Game game = new Game();
-                    Scanner keyboard = new Scanner(System.in);
                     System.out.println("Welke game wilt u toevoegen?");
-                    String naam = keyboard.nextLine();
+                    String naam = scanner.nextLine();
                     game.setNaam(naam);
 
-                    System.out.println("Wat is het releaseJaar?");
-                    int jaarRelease = keyboard.nextInt();
+                    System.out.println("Wat is het release jaar?");
+                    int jaarRelease = scanner.nextInt();
                     game.setJaarRelease(jaarRelease);
 
-                    keyboard.nextLine();
+                    scanner.nextLine();
 
                     System.out.println("Wat is het genre?");
-                    String genre = keyboard.nextLine();
+                    String genre = scanner.nextLine();
                     game.setGenre(genre);
 
                     System.out.println("Wat is de prijs?");
-                    double prijs = keyboard.nextDouble();
+                    double prijs = scanner.nextDouble();
                     game.setPrijs(prijs);
                     scanner.nextLine();
 
