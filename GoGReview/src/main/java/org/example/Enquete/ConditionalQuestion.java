@@ -7,20 +7,49 @@ import java.util.Scanner;
 
 public class ConditionalQuestion implements Question {
 
-    private String text;
-    private ArrayList<String> answers;
-    private ArrayList<Question> followupQuestions;
+    /**
+     * Contains the question in text.
+     */
+    private final String text;
 
+    /**
+     * Contains all possible answers.
+     */
+    private final ArrayList<String> answers;
+
+    /**
+     * Contains all questions that will be asked if a specific answer is given.
+     */
+    private final ArrayList<Question> followupQuestions;
+
+    /**
+     * Constructs a new {@code ConditionalQuestion}.
+     *
+     * @param text The question in text
+     */
     public ConditionalQuestion(String text) {
         this.text = text;
         answers = new ArrayList<>();
         followupQuestions = new ArrayList<>();
     }
 
+    /**
+     * Gives the question text of this {@code ConditionalQuestion}.
+     *
+     * @return The text of this {@code ConditionalQuestion}
+     */
     public String getText() {
         return this.text;
     }
 
+    /**
+     * Appends a new answer to the possible answers of this
+     * {@code ConditionalQuestion}.
+     *
+     * @param answer The text of this answer
+     * @param question The {@code Question} that is associated with this
+     * answer. Can be null, and that means that there is no followup question
+     */
     public void addAnswer(String answer, Question question) {
         if (answers.size() < 4) {
             answers.add(answer);
@@ -30,6 +59,13 @@ public class ConditionalQuestion implements Question {
         }
     }
 
+    /**
+     * Answer the question and write it to a file with the given
+     * {@code CSVWriter}.
+     *
+     * @param scanner Takes the users' input to answer the question
+     * @param writer Knows where to write the answer to
+     */
     @Override
     public void answerQuestion(Scanner scanner, CSVWriter writer) {
         boolean running = true;

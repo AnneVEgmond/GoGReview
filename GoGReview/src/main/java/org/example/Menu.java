@@ -419,6 +419,14 @@ public class Menu {
                     System.out.println("Welke game wilt u toevoegen?");
                     String naam = scanner.nextLine();
                     game.setNaam(naam);
+                    File directory = new File(ResourcePath + "/Reviews/" + naam + "_reviews.csv");
+                    try {
+                        if (!directory.exists()) {
+                            directory.createNewFile();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
 
                     System.out.println("Wat is het release jaar?");
                     int jaarRelease = scanner.nextInt();

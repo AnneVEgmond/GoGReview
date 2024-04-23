@@ -4,22 +4,42 @@ import java.util.Scanner;
 
 /**
  * Utility class
- *
+ * <p>
  * Dit moet een aparte klasse zijn zodat het mogelijk is voor een conditionele
  * vraag altijd een vraag toe te voegen bij een antwoord.
  */
-public class QuestionMaker {
+public final class QuestionMaker {
 
+    /**
+     * Empty, private constructor to make sure this class can not be
+     * instantiated.
+     */
+    private QuestionMaker() { }
+
+    /**
+     * Provides the proces of creating an {@code OpenQuestion} object.
+     *
+     * @param scanner Takes the users' input to create the question
+     * @return A new {@code OpenQuestion} according to the users' input
+     */
     public static OpenQuestion createOpenQuestion(Scanner scanner) {
         System.out.println("Voer de vraag in:");
         String questionText = scanner.nextLine();
         return new OpenQuestion(questionText);
     }
 
-    public static MultiplechoiceQuestion createMultiplechoiceQuestion(Scanner scanner) {
+    /**
+     * Provides the process of creating a {@code MultipleChoiceQuestion}
+     * object.
+     *
+     * @param scanner Takes the users' input to create the question
+     * @return A new {@code MultipleChoiceQuestion} according to the users'
+     * input
+     */
+    public static MultipleChoiceQuestion createMultiplechoiceQuestion(Scanner scanner) {
         System.out.println("Voer de vraag in:");
         String questionText = scanner.nextLine();
-        MultiplechoiceQuestion question = new MultiplechoiceQuestion(questionText);
+        MultipleChoiceQuestion question = new MultipleChoiceQuestion(questionText);
         System.out.println("Vul eerste antwoord in:");
         question.addAnswer(scanner.nextLine());
         System.out.println("Vul tweede antwoord in:");
@@ -56,6 +76,12 @@ public class QuestionMaker {
         return question;
     }
 
+    /**
+     * Provides the processof creating a {@code ConditionalQuestion} object.
+     *
+     * @param scanner Takes the users' input to create the question.
+     * @return A new {@code ConditionalQuestion} according to the users' input
+     */
     public static ConditionalQuestion createConditionalQuestion(Scanner scanner) {
         System.out.println("Voer de vraag in:");
         String questionText = scanner.nextLine();
@@ -96,6 +122,15 @@ public class QuestionMaker {
         return question;
     }
 
+    /**
+     * Whenever an answer is added to a {@code ConditionalQuestion}, it has to
+     * be asked if the user wants another question to be asked when this answer
+     * is chosen.
+     *
+     * @param scanner Takes the users' input
+     * @return {@code Null} if the user does not want to have another question
+     * asked when this answer is chosen. Another {@code Question} if they do.
+     */
     private static Question follupQuestion(Scanner scanner) {
         Question result = null;
         boolean runningOuter = true;
