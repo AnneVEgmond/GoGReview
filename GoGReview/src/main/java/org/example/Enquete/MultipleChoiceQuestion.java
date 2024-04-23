@@ -66,7 +66,7 @@ public class MultipleChoiceQuestion implements Question {
             for (int i = 0; i < answers.size(); i++) {
                 System.out.println((i + 1) + ". " + this.answers.get(i));
             }
-            System.out.println("Voer uw keuze in: ");
+            System.out.println("Voer uw keuze in: (Kies een nummertje)");
             answer = scanner.nextInt();
             scanner.nextLine();
             if (answer > 0 && answer <= answers.size()) {
