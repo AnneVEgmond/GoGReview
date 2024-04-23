@@ -1,7 +1,8 @@
 import org.example.GameReview.GameLibrary;
 import org.example.GameReview.Game;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.ArrayList;
 
 public class GameLibraryTest {
@@ -13,8 +14,8 @@ public class GameLibraryTest {
         
         
         ArrayList<Game> sortedGames = gameLibrary.printGamesByRating();
-        
-    
-        assertTrue(sortedGames != null);
+
+
+        assertNotNull(sortedGames);
     }
 }
